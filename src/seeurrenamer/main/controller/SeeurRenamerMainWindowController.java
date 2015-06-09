@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-import seeurrenamer.main.model.OperationMode;
 import seeurrenamer.main.model.RenameMethod;
 import seeurrenamer.main.model.SelectedPath;
 import seeurrenamer.main.util.WindowLoader;
@@ -38,9 +37,6 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	private TableColumn<SelectedPath, Path> afterTableColumn;
 
 	@FXML
-	private ComboBox<OperationMode> operationModeComboBox;
-
-	@FXML
 	private ComboBox<RenameMethod> renameMethodComboBox;
 
 	@FXML
@@ -58,49 +54,41 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.beforeTableColumn.setCellValueFactory(new PropertyValueFactory<>(
-				"before"));
-		this.afterTableColumn.setCellValueFactory(new PropertyValueFactory<>(
-				"after"));
-		this.selectedPathList = FXCollections.observableArrayList();
-		this.selectedPathTableView.setItems(selectedPathList);
-		this.operationModeComboBox.getItems().setAll(
-				OperationMode.INSERT_OR_OVERWRITE,
-				OperationMode.SEARCH_AND_REPLACE);
-		this.renameMethodComboBox.getItems().setAll(
-				RenameMethod.NAME_AND_SUFFIX, RenameMethod.NAME,
-				RenameMethod.SUFFIX);
-		this.renameMethodComboBox.setValue(RenameMethod.NAME_AND_SUFFIX);
-	}
+			this.beforeTableColumn
+					.setCellValueFactory(new PropertyValueFactory<>("before"));
+			this.afterTableColumn
+					.setCellValueFactory(new PropertyValueFactory<>("after"));
+			this.selectedPathList = FXCollections.observableArrayList();
+			this.selectedPathTableView.setItems(selectedPathList);
+			this.renameMethodComboBox.getItems().setAll(
+					RenameMethod.NAME_AND_SUFFIX, RenameMethod.NAME,
+					RenameMethod.SUFFIX);
+			this.renameMethodComboBox.setValue(RenameMethod.NAME_AND_SUFFIX);
+		
+		}
 
 	@FXML
-	public void handleOnSelectingOperationMode() {
-		try {
-			if (this.operationModeComboBox.getSelectionModel()
-					.getSelectedItem()
-					.equals(OperationMode.INSERT_OR_OVERWRITE)) {
-				WindowLoader windowLoader = new WindowLoader(
-						"seeurrenamer/main/view/InsertOrWriteManipulator.fxml",
-						"manipulator",
-						(fxmlLoader, stage) -> {
-							InsertOverwriteManipulatorController insertOverwriteManipulatorController = (InsertOverwriteManipulatorController) fxmlLoader
-									.getController();
-							insertOverwriteManipulatorController
-									.setSelectedPathList(this.selectedPathList);
-							insertOverwriteManipulatorController
-									.setRenameMethod(this.renameMethodComboBox
-											.getSelectionModel()
-											.getSelectedItem());
-						});
-				windowLoader.setResizable(false);
-				windowLoader.show(WindowLoader.SHOW_AND_WAITING);
-			} else {
-			}
+	public void handleOnInsAndOvMenuItem() {
+		 try {
+			new WindowLoader(
+					"seeurrenamer/main/view/InsertOrWriteManipulator.fxml",
+					"manipulator",
+					(fxmlLoader, stage) -> {
+						InsertOverwriteManipulatorController insertOverwriteManipulatorController = (InsertOverwriteManipulatorController) fxmlLoader
+								.getController();
+						insertOverwriteManipulatorController
+								.setSelectedPathList(this.selectedPathList);
+						insertOverwriteManipulatorController
+								.setRenameMethod(this.renameMethodComboBox
+										.getSelectionModel().getSelectedItem());
+						insertOverwriteManipulatorController.setStage(stage);
+
+					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
-
 	@FXML
 	public void handleOnClickAddingButton() {
 		FileChooser fileChooser = new FileChooser();

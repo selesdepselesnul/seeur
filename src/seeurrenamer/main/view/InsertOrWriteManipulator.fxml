@@ -5,33 +5,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane fx:id="manipulatorTitledPane" text="manipulator"
-	xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="seeurrenamer.main.controller.InsertOverwriteManipulatorController">
+<TitledPane text="manipulator" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seeurrenamer.main.controller.InsertOverwriteManipulatorController">
 	<content>
-		<GridPane fx:id="insertOrOverwritePane">
+		<GridPane>
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
-					minWidth="10.0" prefWidth="226.0" />
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
-					minWidth="10.0" prefWidth="367.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="226.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="367.0" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints maxHeight="1.7976931348623157E308"
-					minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="1.7976931348623157E308"
-					minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<ComboBox fx:id="operationModeComboBox" onAction="#handleRenameOperation"
-					prefWidth="150.0" />
-				<TextField fx:id="newStringTextField" onKeyReleased="#handleRenameOperation"
-					promptText="any string" GridPane.columnIndex="1"
-					GridPane.halignment="RIGHT" />
-				<ComboBox fx:id="directionComboBox" onAction="#handleRenameOperation"
-					prefWidth="150.0" GridPane.rowIndex="1" />
-				<HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0"
-					GridPane.columnIndex="1" GridPane.rowIndex="1">
+				<ComboBox fx:id="operationModeComboBox" onAction="#handleRenameOperation" prefWidth="150.0" />
+				<TextField fx:id="newStringTextField" onKeyReleased="#handleRenameOperation" promptText="any string" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+				<ComboBox fx:id="directionComboBox" onAction="#handleRenameOperation" prefWidth="150.0" GridPane.rowIndex="1" />
+				<HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
 					<children>
 						<Label text="at position">
 							<HBox.margin>

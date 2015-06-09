@@ -15,9 +15,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seeurrenamer.main.model.SelectedPath;
-import seeurrenamer.main.util.PathRenamer;
+import seeurrenamer.main.util.PositionalPathRenamer;
 
-public class PathRenamerTest {
+public class PositionalPathRenamerTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -42,21 +42,24 @@ public class PathRenamerTest {
 
 	@Test
 	public void testRenameWithLeftAndInsert() {
-		PathRenamer pathRenamer = new PathRenamer();
+		PositionalPathRenamer pathRenamer = new PositionalPathRenamer(
+				PositionalPathRenamer.INSERT_OPERATION,
+				PositionalPathRenamer.LEFT_SIDE, 4);
 
 		List<SelectedPath> expectedSelectedPaths = Arrays.asList(
 				new SelectedPath(Paths.get("/xyz/jadi.jar"), Paths
 						.get("/xyz/jadian.jar")),
 				new SelectedPath(Paths.get("/xyz/jada.jar"), Paths
 						.get("/xyz/jadaan.jar")));
-		assertThat(pathRenamer.rename(pathList, 4, "an", PathRenamer.LEFT_SIDE,
-				PathRenamer.INSERT_OPERATION),
+		assertThat(pathRenamer.rename(pathList, "an"),
 				is(equalTo(expectedSelectedPaths)));
 	}
 
 	@Test
 	public void testRenameWithRightPositional() {
-		PathRenamer pathRenamer = new PathRenamer();
+		PositionalPathRenamer pathRenamer = new PositionalPathRenamer(
+				PositionalPathRenamer.INSERT_OPERATION,
+				PositionalPathRenamer.RIGHT_SIDE, 3);
 
 		List<SelectedPath> selectedPathList = Arrays.asList(
 				new SelectedPath(Paths.get("/xyz/jadi.jar"), Paths
@@ -64,14 +67,15 @@ public class PathRenamerTest {
 				new SelectedPath(Paths.get("/xyz/jada.jar"), Paths
 						.get("/xyz/jada.anjar")));
 
-		assertThat(pathRenamer.rename(pathList, 3, "an",
-				PathRenamer.RIGHT_SIDE, PathRenamer.INSERT_OPERATION),
+		assertThat(pathRenamer.rename(pathList, "an"),
 				is(equalTo(selectedPathList)));
 	}
 
 	@Test
 	public void testRenameWithLeftPositionAndOverwrite() {
-		PathRenamer pathRenamer = new PathRenamer();
+		PositionalPathRenamer pathRenamer = new PositionalPathRenamer(
+				PositionalPathRenamer.OVERWRITE_OPERATION,
+				PositionalPathRenamer.LEFT_SIDE, 4);
 
 		List<SelectedPath> selectedPathList = Arrays.asList(
 				new SelectedPath(Paths.get("/xyz/jadi.jar"), Paths
@@ -79,14 +83,16 @@ public class PathRenamerTest {
 				new SelectedPath(Paths.get("/xyz/jada.jar"), Paths
 						.get("/xyz/jadaanar")));
 
-		assertThat(pathRenamer.rename(pathList, 4, "an", PathRenamer.LEFT_SIDE,
-				PathRenamer.OVERWRITE_OPERATION), is(equalTo(selectedPathList)));
+		assertThat(pathRenamer.rename(pathList, "an"),
+				is(equalTo(selectedPathList)));
 
 	}
 
 	@Test
 	public void testRenameWithRightPositionAndOverwrite() {
-		PathRenamer pathRenamer = new PathRenamer();
+		PositionalPathRenamer pathRenamer = new PositionalPathRenamer(
+				PositionalPathRenamer.OVERWRITE_OPERATION,
+				PositionalPathRenamer.RIGHT_SIDE, 4);
 
 		List<SelectedPath> selectedPathList = Arrays.asList(
 				new SelectedPath(Paths.get("/xyz/jadi.jar"), Paths
@@ -94,8 +100,7 @@ public class PathRenamerTest {
 				new SelectedPath(Paths.get("/xyz/jada.jar"), Paths
 						.get("/xyz/jadolear")));
 
-		assertThat(pathRenamer.rename(pathList, 4, "ole",
-				PathRenamer.RIGHT_SIDE, PathRenamer.OVERWRITE_OPERATION),
+		assertThat(pathRenamer.rename(pathList, "ole"),
 				is(equalTo(selectedPathList)));
 
 	}

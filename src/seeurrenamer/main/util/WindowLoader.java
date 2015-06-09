@@ -14,6 +14,7 @@ public class WindowLoader {
 	public static final int SHOW_AND_WAITING = 0;
 	public static final int SHOW_ONLY = 1;
 	private Stage stage;
+	private String stringRepresentation;
 
 	public WindowLoader(String sourceResource, String windowTitle,
 			BiConsumer<FXMLLoader, Stage> biConsumer) throws IOException {
@@ -43,6 +44,7 @@ public class WindowLoader {
 				ClassLoader.getSystemResource(styleResource).toExternalForm());
 		this.stage.setScene(scene);
 		this.stage.setTitle(windowTitle);
+		this.stage.setResizable(false);
 		this.stage.initModality(Modality.APPLICATION_MODAL);
 		if (biConsumer != null) {
 			biConsumer.accept(fxmlLoader, this.stage);
@@ -65,11 +67,18 @@ public class WindowLoader {
 	}
 
 	public void setIcon(String imagePathStr) {
-		stage.getIcons()
-				.add(new Image(
-						ClassLoader
-								.getSystemResourceAsStream(imagePathStr)));
+		stage.getIcons().add(
+				new Image(ClassLoader.getSystemResourceAsStream(imagePathStr)));
 
+	}
+
+	public void setStringRepresentation(String stringRepresentation) {
+		this.stringRepresentation = stringRepresentation;
+	}
+
+	@Override
+	public String toString() {
+		return this.stringRepresentation;
 	}
 
 }

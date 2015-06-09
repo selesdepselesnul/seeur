@@ -1,7 +1,6 @@
 package seeurrenamer.main.model;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javafx.beans.property.SimpleObjectProperty;
 
