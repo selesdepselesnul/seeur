@@ -39,6 +39,20 @@ public class NumberingManipulatorController implements Initializable {
 						.getBeforeFullPath(), PathRenamer.extractNewPath(
 						selectedPath, newPathName)));
 			}
+		} else if (this.numberingFormatComboBox.getValue().equals(
+				"a., b., c., d. ...")) {
+			char charNumber = 'a';
+			for (SelectedPath selectedPath : this.selectedPathList) {
+				if (charNumber == 'z') {
+					charNumber = 'a';
+				}
+				System.out.println("char numbering system");
+				Path newPathName = Paths.get(charNumber + "."
+						+ selectedPath.getAfterFullPath().toString());
+				newSelectedPathList.add(new SelectedPath(selectedPath
+						.getBeforeFullPath(), newPathName));
+				charNumber++;
+			}
 		}
 		this.selectedPathList.setAll(newSelectedPathList);
 	}
