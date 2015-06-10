@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="543.0" minWidth="665.0" prefHeight="543.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seeurrenamer.main.controller.SeeurRenamerMainWindowController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="543.0" minWidth="665.0" prefHeight="543.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seeurrenamer.main.controller.SeeurRenamerMainWindowController">
 	<columnConstraints>
 		<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
 	</columnConstraints>
@@ -66,15 +66,17 @@
 						<Insets right="40.0" />
 					</GridPane.margin>
 				</ComboBox>
-            <SplitMenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="181.0" text="operation" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#handleOnInsAndOvMenuItem" text="insert or overwrite" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-               <GridPane.margin>
-                  <Insets right="30.0" />
-               </GridPane.margin>
-            </SplitMenuButton>
+				<SplitMenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="181.0" text="operation" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+					<items>
+						<MenuItem mnemonicParsing="false" onAction="#handleOnInsAndOvMenuItem" text="insert or overwrite" />
+						<MenuItem mnemonicParsing="false" onAction="#handleSearchAndReplaceMenuItem" text="search and replace" />
+						<MenuItem mnemonicParsing="false" onAction="#handleCaseConverterMenuItem" text="convert case" />
+						<MenuItem mnemonicParsing="false" onAction="#handleNumberingFormatMenuItem" text="give sequences" />
+					</items>
+					<GridPane.margin>
+						<Insets right="30.0" />
+					</GridPane.margin>
+				</SplitMenuButton>
 			</children>
 		</GridPane>
 		<GridPane GridPane.rowIndex="3">

@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import seeurrenamer.main.model.RenameMethod;
@@ -27,6 +29,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class SeeurRenamerMainWindowController implements Initializable {
+
 	@FXML
 	private TableView<SelectedPath> selectedPathTableView;
 
@@ -54,22 +57,22 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-			this.beforeTableColumn
-					.setCellValueFactory(new PropertyValueFactory<>("before"));
-			this.afterTableColumn
-					.setCellValueFactory(new PropertyValueFactory<>("after"));
-			this.selectedPathList = FXCollections.observableArrayList();
-			this.selectedPathTableView.setItems(selectedPathList);
-			this.renameMethodComboBox.getItems().setAll(
-					RenameMethod.NAME_AND_SUFFIX, RenameMethod.NAME,
-					RenameMethod.SUFFIX);
-			this.renameMethodComboBox.setValue(RenameMethod.NAME_AND_SUFFIX);
-		
-		}
+		this.beforeTableColumn.setCellValueFactory(new PropertyValueFactory<>(
+				"before"));
+		this.afterTableColumn.setCellValueFactory(new PropertyValueFactory<>(
+				"after"));
+		this.selectedPathList = FXCollections.observableArrayList();
+		this.selectedPathTableView.setItems(selectedPathList);
+		this.renameMethodComboBox.getItems().setAll(
+				RenameMethod.NAME_AND_SUFFIX, RenameMethod.NAME,
+				RenameMethod.SUFFIX);
+		this.renameMethodComboBox.setValue(RenameMethod.NAME_AND_SUFFIX);
+
+	}
 
 	@FXML
 	public void handleOnInsAndOvMenuItem() {
-		 try {
+		try {
 			new WindowLoader(
 					"seeurrenamer/main/view/InsertOrWriteManipulator.fxml",
 					"manipulator",
@@ -87,8 +90,28 @@ public class SeeurRenamerMainWindowController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
+
+	@FXML
+	public void handleSearchAndReplaceMenuItem() {
+		try {
+			new WindowLoader(
+					"seeurrenamer/main/view/SearchAndReplaceManipulator.fxml",
+					"manipulator",
+					(fxmlLoader, stage) -> {
+						SearchingAndReplacingManipulatorController searchingAndReplacingManipulatorController = (SearchingAndReplacingManipulatorController) fxmlLoader
+								.getController();
+						searchingAndReplacingManipulatorController
+								.setSelectedPathList(this.selectedPathList);
+
+					}).show(WindowLoader.SHOW_AND_WAITING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	@FXML
 	public void handleOnClickAddingButton() {
 		FileChooser fileChooser = new FileChooser();
@@ -103,17 +126,25 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 	@FXML
 	public void handleRenameButton() {
+		List<SelectedPath> newSelectedPathList = new ArrayList<>();
+		this.outputTextArea.clear();
+
 		this.selectedPathList
 				.forEach(selectedPath -> {
 					try {
-						Files.move(selectedPath.getBeforeFullPath(),
-								selectedPath.getAfterFullPath());
+						Path beforeFullPath = selectedPath.getBeforeFullPath();
+						Path afterFullPath = selectedPath.getAfterFullPath();
+						newSelectedPathList.add(new SelectedPath(afterFullPath,
+								afterFullPath));
+						Files.move(beforeFullPath, afterFullPath);
 						this.outputTextArea.appendText(selectedPath.toString()
 								+ "\n\n");
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				});
+		this.selectedPathList.setAll(newSelectedPathList);
+
 	}
 
 	@FXML
@@ -126,6 +157,44 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	public void handleDeleteButton() {
 		this.selectedPathList.remove(this.selectedPathTableView
 				.getSelectionModel().getSelectedItem());
+	}
+
+	@FXML
+	public void handleCaseConverterMenuItem() {
+		try {
+			new WindowLoader(
+					"seeurrenamer/main/view/CaseManipulator.fxml",
+					"manipulator",
+					(fxmlLoader, stage) -> {
+						CaseConverterController caseConverterController = (CaseConverterController) fxmlLoader
+								.getController();
+						caseConverterController
+								.setSelectedPathList(this.selectedPathList);
+
+					}).show(WindowLoader.SHOW_AND_WAITING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@FXML
+	public void handleNumberingFormatMenuItem() {
+		try {
+			new WindowLoader(
+					"seeurrenamer/main/view/NumberingManipulator.fxml",
+					"manipulator",
+					(fxmlLoader, stage) -> {
+						NumberingManipulatorController numberingManipulatorController = (NumberingManipulatorController) fxmlLoader
+								.getController();
+						numberingManipulatorController
+								.setSelectedPathList(this.selectedPathList);
+
+					}).show(WindowLoader.SHOW_AND_WAITING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public void setStage(Stage stage) {

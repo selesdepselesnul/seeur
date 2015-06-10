@@ -9,7 +9,8 @@ import seeurrenamer.main.model.SelectedPath;
 
 public abstract class PathRenamer {
 
-	private Path extractNewPath(SelectedPath selectedPath, Path newPathName) {
+	public static Path extractNewPath(SelectedPath selectedPath,
+			Path newPathName) {
 		return Paths.get(selectedPath.getBeforeFullPath().getParent()
 				.toString()
 				+ "/" + newPathName.toString());

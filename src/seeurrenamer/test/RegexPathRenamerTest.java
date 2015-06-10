@@ -43,8 +43,19 @@ public class RegexPathRenamerTest {
 	@Test
 	public void testRenameWithCaseSensitive() {
 		RegexPathRenamer regexPathRenamer = new RegexPathRenamer("mysql");
-		List<SelectedPath> expectedList = Arrays.asList(new SelectedPath(Paths.get("/xyz/jadi_mysql_.jar"), Paths
-				.get("/xyz/jadi_sos_.jar")));
-		assertThat(regexPathRenamer.rename(this.pathList, "sos"), is(equalTo(expectedList)));
+		List<SelectedPath> expectedList = Arrays.asList(new SelectedPath(Paths
+				.get("/xyz/jadi_mysql_.jar"), Paths.get("/xyz/jadi_sos_.jar")));
+		assertThat(regexPathRenamer.rename(this.pathList, "sos"),
+				is(equalTo(expectedList)));
 	}
+
+	@Test
+	public void testRenameWithCaseInsensitive() {
+		RegexPathRenamer regexPathRenamer = new RegexPathRenamer("MYSQL", true);
+		List<SelectedPath> expectedList = Arrays.asList(new SelectedPath(Paths
+				.get("/xyz/jadi_mysql_.jar"), Paths.get("/xyz/jadi_sos_.jar")));
+		assertThat(regexPathRenamer.rename(this.pathList, "sos"),
+				is(equalTo(expectedList)));
+	}
+
 }
