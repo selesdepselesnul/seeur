@@ -43,15 +43,18 @@ public class NumberingManipulatorController implements Initializable {
 				"a., b., c., d. ...")) {
 			char charNumber = 'a';
 			for (SelectedPath selectedPath : this.selectedPathList) {
-				if (charNumber == 'z') {
-					charNumber = 'a';
-				}
 				System.out.println("char numbering system");
 				Path newPathName = Paths.get(charNumber + "."
-						+ selectedPath.getAfterFullPath().toString());
+						+ selectedPath.getAfter().toString());
+				System.out.println(newPathName);
 				newSelectedPathList.add(new SelectedPath(selectedPath
-						.getBeforeFullPath(), newPathName));
-				charNumber++;
+						.getBeforeFullPath(), PathRenamer.extractNewPath(
+						selectedPath, newPathName)));
+				if (charNumber == 'z') {
+					charNumber = 'a';
+				} else {
+					charNumber++;
+				}
 			}
 		}
 		this.selectedPathList.setAll(newSelectedPathList);
