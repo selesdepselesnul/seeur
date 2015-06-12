@@ -67,11 +67,15 @@ public class SeeurRenamerMainWindowController implements Initializable {
 		this.selectedPathTableView.setItems(selectedPathList);
 		this.selectedPathTableView.setPlaceholder(new Label(
 				"No files are selected"));
+		this.outputTextArea
+				.setText("table is empty, click plus button for add files to table");
+
 	}
 
 	@FXML
 	public void handleOnInsAndOvMenuItem() {
 		try {
+			checkIfTableEmpty();
 			new WindowLoader(
 					"seeurrenamer/main/view/InsertOrWriteManipulator.fxml",
 					"insert / overwrite",
@@ -90,15 +94,22 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 	}
 
+	private void checkIfTableEmpty() {
+		if (this.selectedPathList.size() != 0) {
+			this.outputTextArea.setStyle("-fx-text-fill: green");
+		}
+	}
+
 	private void printErrorToConsoleOutput(Exception e) {
 		this.outputTextArea.setStyle("-fx-text-fill: red");
-		this.outputTextArea.setText(e.getMessage());
+		this.outputTextArea
+				.setText("ouch... something going wrong !\n\n you rename files that don't exist :(");
 	}
 
 	@FXML
 	public void handleSearchAndReplaceMenuItem() {
 		try {
-			this.outputTextArea.setStyle("-fx-text-fill: green");
+			checkIfTableEmpty();
 			new WindowLoader(
 					"seeurrenamer/main/view/SearchAndReplaceManipulator.fxml",
 					"seeurrenamer/main/resources/style/searching_and_replacing_window.css",
@@ -119,10 +130,11 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	@FXML
 	public void handleOnClickAddingButton() {
 
-		this.outputTextArea.setStyle("-fx-text-fill: green");
 		FileChooser fileChooser = new FileChooser();
 		List<File> fileList = fileChooser.showOpenMultipleDialog(this.stage);
 		if (fileList != null) {
+			this.outputTextArea.setStyle("-fx-text-fill: green");
+			this.outputTextArea.setText("ready for renaming !\n");
 			List<Path> pathList = fileList.stream()
 					.map(files -> files.toPath()).collect(Collectors.toList());
 			selectedPathList.addAll(pathList.stream()
@@ -137,9 +149,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	@FXML
 	public void handleRenameButton() {
 
-
-		this.outputTextArea.setStyle("-fx-text-fill: green");
 		if (this.selectedPathList.size() != 0) {
+			this.outputTextArea.setStyle("-fx-text-fill: green");
 			List<SelectedPath> newSelectedPathList = new ArrayList<>();
 			this.outputTextArea.clear();
 
@@ -150,8 +161,9 @@ public class SeeurRenamerMainWindowController implements Initializable {
 					newSelectedPathList.add(new SelectedPath(afterFullPath,
 							afterFullPath));
 					Files.move(beforeFullPath, afterFullPath);
-					this.outputTextArea.appendText(selectedPath.toString()
-							+ "\n\n");
+					this.outputTextArea.appendText("rename : "
+							+ selectedPath.getBeforeFullPath() + "\nto : "
+							+ selectedPath.getAfterFullPath() + "\n\n");
 				} catch (Exception e) {
 					printErrorToConsoleOutput(e);
 					e.printStackTrace();
@@ -165,22 +177,30 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 	@FXML
 	public void handleClearButton() {
-		this.outputTextArea.setStyle("-fx-text-fill: green");
+		this.outputTextArea.setStyle("-fx-text-fill: white");
 
 		this.selectedPathList.clear();
 		this.outputTextArea.clear();
-		this.outputTextArea.setText("output console");
+		this.outputTextArea
+				.setText("table is empty, click plus button for add files to table");
 	}
 
 	@FXML
 	public void handleDeleteButton() {
-		this.selectedPathList.remove(this.selectedPathTableView
-				.getSelectionModel().getSelectedItem());
+		SelectedPath selectedPath = this.selectedPathTableView
+				.getSelectionModel().getSelectedItem();
+		if (selectedPath != null) {
+			this.outputTextArea.setStyle("-fx-text-fill: green");
+			this.outputTextArea.appendText("delete from table : "
+					+ selectedPath.toString() + "\n\n");
+			this.selectedPathList.remove(selectedPath);
+		}
 	}
 
 	@FXML
 	public void handleCaseConverterMenuItem() {
 		try {
+			checkIfTableEmpty();
 			new WindowLoader(
 					"seeurrenamer/main/view/CaseManipulator.fxml",
 					"convert case",
@@ -201,6 +221,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	@FXML
 	public void handleNumberingFormatMenuItem() {
 		try {
+			checkIfTableEmpty();
 			new WindowLoader(
 					"seeurrenamer/main/view/NumberingManipulator.fxml",
 					"give sequence",
@@ -221,6 +242,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	@FXML
 	public void handleRemovingCharacterMenuItem() {
 		try {
+			checkIfTableEmpty();
 			new WindowLoader(
 					"seeurrenamer/main/view/RemovingCharManipulator.fxml",
 					"remove character",
@@ -249,7 +271,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	@FXML
 	public void handleAboutButton() {
 
-		this.outputTextArea.setStyle("-fx-text-fill: green");
+		this.outputTextArea.setStyle("-fx-text-fill: white");
 		this.outputTextArea.clear();
 		BufferedReader bufferedReader = new BufferedReader(
 				new InputStreamReader(
