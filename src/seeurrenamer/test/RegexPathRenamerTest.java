@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seeurrenamer.main.model.SelectedPath;
@@ -19,13 +16,6 @@ import seeurrenamer.main.util.RegexPathRenamer;
 
 public class RegexPathRenamerTest {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
 
 	private List<SelectedPath> pathList;
 
@@ -36,10 +26,7 @@ public class RegexPathRenamerTest {
 
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
+	
 	@Test
 	public void testRenameWithCaseSensitive() {
 		RegexPathRenamer regexPathRenamer = new RegexPathRenamer("mysql");
