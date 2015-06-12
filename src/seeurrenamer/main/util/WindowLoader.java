@@ -30,6 +30,11 @@ public class WindowLoader {
 		if (biConsumer != null) {
 			biConsumer.accept(fxmlLoader, this.stage);
 		}
+		this.stage
+				.getIcons()
+				.add(new Image(
+						ClassLoader
+								.getSystemResourceAsStream("seeurrenamer/main/resources/style/image/main_icon.png")));
 	}
 
 	public WindowLoader(String sourceResource, String styleResource,
@@ -49,6 +54,12 @@ public class WindowLoader {
 		if (biConsumer != null) {
 			biConsumer.accept(fxmlLoader, this.stage);
 		}
+
+		this.stage
+				.getIcons()
+				.add(new Image(
+						ClassLoader
+								.getSystemResourceAsStream("seeurrenamer/main/resources/style/image/main_icon.png")));
 
 	}
 

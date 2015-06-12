@@ -14,7 +14,7 @@ public class Main extends Application {
 			WindowLoader windowLoader = new WindowLoader(
 					"seeurrenamer/main/view/SeeurRenamerMainWindow.fxml",
 					"seeurrenamer/main/resources/style/seeur_renamer_main_window.css",
-					"seeur-renamer ~BETA~",
+					"SEEUR ~BETA~",
 					(fxmlLoader, stage) -> {
 						SeeurRenamerMainWindowController seeurRenamerMainWindowController = (SeeurRenamerMainWindowController) fxmlLoader
 								.getController();
