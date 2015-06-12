@@ -18,6 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -64,6 +65,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 				"after"));
 		this.selectedPathList = FXCollections.observableArrayList();
 		this.selectedPathTableView.setItems(selectedPathList);
+		this.selectedPathTableView.setPlaceholder(new Label(
+				"No files are selected"));
 	}
 
 	@FXML

@@ -1,52 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane collapsible="false" text="manipulator"
-	xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="seeurrenamer.main.controller.SearchingAndReplacingManipulatorController">
+<TitledPane collapsible="false" text="manipulator" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seeurrenamer.main.controller.SearchingAndReplacingManipulatorController">
 	<content>
 		<GridPane>
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
-					minWidth="10.0" prefWidth="226.0" />
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
-					minWidth="10.0" prefWidth="367.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="226.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="367.0" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints maxHeight="1.7976931348623157E308"
-					minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="1.7976931348623157E308"
-					minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<CheckBox fx:id="isCaseInsensitiveCheckBox"
-					mnemonicParsing="false" onAction="#handleOnWriteString" text="case insensitive"
-					GridPane.columnIndex="1" GridPane.rowIndex="1">
+				<CheckBox fx:id="isCaseInsensitiveCheckBox" mnemonicParsing="false" onAction="#handleOnWriteString" text="case insensitive" GridPane.columnIndex="1" GridPane.rowIndex="1">
 					<GridPane.margin>
 						<Insets left="10.0" />
 					</GridPane.margin>
 				</CheckBox>
-				<TextField fx:id="regexTextField" onKeyReleased="#handleOnWriteString"
-					promptText="search for">
+				<TextField fx:id="regexTextField" onKeyReleased="#handleOnWriteString" promptText="search for">
 					<GridPane.margin>
 						<Insets left="10.0" right="10.0" />
 					</GridPane.margin>
 				</TextField>
-				<TextField fx:id="replacerTextField" onKeyReleased="#handleOnWriteString"
-					promptText="replace with" GridPane.columnIndex="1">
+				<TextField fx:id="replacerTextField" onKeyReleased="#handleOnWriteString" promptText="replace with" GridPane.columnIndex="1">
 					<GridPane.margin>
 						<Insets left="10.0" right="10.0" />
 					</GridPane.margin>
 				</TextField>
-				<Button mnemonicParsing="false" onAction="#handleHelpRegex"
-					prefHeight="26.0" prefWidth="28.0" GridPane.rowIndex="1">
+				<Button mnemonicParsing="false" onAction="#handleHelpRegex" prefHeight="26.0" prefWidth="28.0" GridPane.rowIndex="1">
 					<GridPane.margin>
 						<Insets left="10.0" />
 					</GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
 				</Button>
 			</children>
 		</GridPane>
