@@ -3,7 +3,6 @@ package seeurrenamer.main.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import seeurrenamer.main.model.RenameMethod;
 import seeurrenamer.main.model.SelectedPath;
 import seeurrenamer.main.util.PathRenamer;
 import seeurrenamer.main.util.PositionalPathRenamer;
@@ -31,8 +30,6 @@ public class InsertOverwriteManipulatorController implements Initializable {
 
 	private ObservableList<SelectedPath> selectedPathList;
 
-	private RenameMethod renameMethod;
-
 	private Stage stage;
 
 	@Override
@@ -48,7 +45,8 @@ public class InsertOverwriteManipulatorController implements Initializable {
 		this.directionComboBox.setValue(PositionalPathRenamer.LEFT_SIDE);
 		this.indexSpinner
 				.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
-						0, 3000, 0));
+						0, Integer.MAX_VALUE, 0));
+
 	}
 
 	@FXML
@@ -56,11 +54,11 @@ public class InsertOverwriteManipulatorController implements Initializable {
 		PathRenamer pathRenamer = new PositionalPathRenamer(
 				this.operationModeComboBox.getValue(),
 				this.directionComboBox.getValue(), this.indexSpinner.getValue());
-		this.selectedPathList.setAll(pathRenamer.rename(
-				this.selectedPathList, this.newStringTextField.getText()));
+		this.selectedPathList.setAll(pathRenamer.rename(this.selectedPathList,
+				this.newStringTextField.getText()));
 		System.out.println(this.newStringTextField.getText());
 	}
-	
+
 	@FXML
 	public void handleOkButton() {
 		this.stage.close();
@@ -69,13 +67,11 @@ public class InsertOverwriteManipulatorController implements Initializable {
 	public void setSelectedPathList(
 			ObservableList<SelectedPath> selectedPathList) {
 		this.selectedPathList = selectedPathList;
-	}
 
-	public void setRenameMethod(RenameMethod renameMethod) {
-		this.renameMethod = renameMethod;
 	}
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
+
 }

@@ -34,7 +34,7 @@ public class NumberingManipulatorController implements Initializable {
 				SelectedPath selectedPath = this.selectedPathList.get(i);
 				Path newPathName = (Paths.get((i + 1) + "."
 						+ selectedPath.getBefore()));
-				System.out.println(newPathName);
+
 				newSelectedPathList.add(new SelectedPath(selectedPath
 						.getBeforeFullPath(), PathRenamer.extractNewPath(
 						selectedPath, newPathName)));
@@ -46,7 +46,7 @@ public class NumberingManipulatorController implements Initializable {
 				System.out.println("char numbering system");
 				Path newPathName = Paths.get(charNumber + "."
 						+ selectedPath.getAfter().toString());
-				System.out.println(newPathName);
+
 				newSelectedPathList.add(new SelectedPath(selectedPath
 						.getBeforeFullPath(), PathRenamer.extractNewPath(
 						selectedPath, newPathName)));

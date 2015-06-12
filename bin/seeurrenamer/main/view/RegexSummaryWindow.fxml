@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="573.0" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seeurrenamer.main.controller.RegexSummaryWindowController">
+	<children>
+		<TextArea fx:id="regexSummaryTextArea" editable="false" layoutX="1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="555.0" prefWidth="573.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<font>
+				<Font name="Liberation Serif Bold" size="13.0" />
+			</font>
+			<cursor>
+				<Cursor fx:constant="TEXT" />
+			</cursor>
+		</TextArea>
+	</children>
+</AnchorPane>

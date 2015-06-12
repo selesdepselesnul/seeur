@@ -1,1 +1,55 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#adding-button {
+	-fx-background-color: transparent; 
+	-fx-background-image: url('image/adding.png');
+	-fx-background-repeat: no-repeat;
+	
+}
+
+#removing-button {
+	-fx-background-color: transparent; 
+	-fx-background-image: url('image/removing.png');
+	-fx-background-repeat: no-repeat ;
+}
+
+#clearing-button {
+	-fx-background-color: transparent; 
+	-fx-background-image: url('image/clearing.png');
+	-fx-background-repeat: no-repeat;
+}
+
+#undoing-button {
+	-fx-background-color: transparent; 
+	-fx-background-image: url('image/undoing.png');
+	-fx-background-repeat: no-repeat;
+}
+
+#about-button {
+	-fx-background-color: transparent; 
+	-fx-background-image: url('image/about.png');
+	-fx-background-repeat: no-repeat;
+}
+
+#rename-button {
+	-fx-background-color: transparent; 
+	-fx-background-image: url('image/rename.png');
+	-fx-background-repeat: no-repeat;
+}
+
+.text-area {
+    -fx-background-color: rgba(53.0,89.0,119.0,0.4);
+    -fx-text-fill: green;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: green;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: green;
+}
+
+
+.text-area .scroll-pane .content{
+    -fx-background-color: black;
+}

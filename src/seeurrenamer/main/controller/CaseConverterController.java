@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.StringJoiner;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -38,7 +37,6 @@ public class CaseConverterController implements Initializable {
 		List<SelectedPath> newSelectedPathList = new ArrayList<>();
 		if (this.caseComboBox.getSelectionModel().getSelectedItem()
 				.equals("UPPERCASE")) {
-			System.out.println("selected uppercase");
 			this.selectedPathList.stream().forEach(
 					selectedPath -> {
 						Path lowerCasePath = Paths.get(selectedPath.getBefore()
@@ -76,6 +74,7 @@ public class CaseConverterController implements Initializable {
 					});
 
 		}
+
 		this.selectedPathList.setAll(newSelectedPathList);
 	}
 }

@@ -1,24 +1,23 @@
 package seeurrenamer.main.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import seeurrenamer.main.model.RenameMethod;
 import seeurrenamer.main.model.SelectedPath;
 import seeurrenamer.main.util.WindowLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -40,9 +39,6 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	private TableColumn<SelectedPath, Path> afterTableColumn;
 
 	@FXML
-	private ComboBox<RenameMethod> renameMethodComboBox;
-
-	@FXML
 	private TitledPane manipulatorTitledPane;
 
 	@FXML
@@ -51,23 +47,23 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	@FXML
 	private TextArea outputTextArea;
 
+	@FXML
+	private List<SelectedPath> oldSelectedList;
+
 	private Stage stage;
 
 	private ObservableList<SelectedPath> selectedPathList;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
+		this.oldSelectedList = new ArrayList<>();
 		this.beforeTableColumn.setCellValueFactory(new PropertyValueFactory<>(
 				"before"));
 		this.afterTableColumn.setCellValueFactory(new PropertyValueFactory<>(
 				"after"));
 		this.selectedPathList = FXCollections.observableArrayList();
 		this.selectedPathTableView.setItems(selectedPathList);
-		this.renameMethodComboBox.getItems().setAll(
-				RenameMethod.NAME_AND_SUFFIX, RenameMethod.NAME,
-				RenameMethod.SUFFIX);
-		this.renameMethodComboBox.setValue(RenameMethod.NAME_AND_SUFFIX);
-
 	}
 
 	@FXML
@@ -75,15 +71,12 @@ public class SeeurRenamerMainWindowController implements Initializable {
 		try {
 			new WindowLoader(
 					"seeurrenamer/main/view/InsertOrWriteManipulator.fxml",
-					"manipulator",
+					"insert / overwrite",
 					(fxmlLoader, stage) -> {
 						InsertOverwriteManipulatorController insertOverwriteManipulatorController = (InsertOverwriteManipulatorController) fxmlLoader
 								.getController();
 						insertOverwriteManipulatorController
 								.setSelectedPathList(this.selectedPathList);
-						insertOverwriteManipulatorController
-								.setRenameMethod(this.renameMethodComboBox
-										.getSelectionModel().getSelectedItem());
 						insertOverwriteManipulatorController.setStage(stage);
 
 					}).show(WindowLoader.SHOW_AND_WAITING);
@@ -98,7 +91,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 		try {
 			new WindowLoader(
 					"seeurrenamer/main/view/SearchAndReplaceManipulator.fxml",
-					"manipulator",
+					"seeurrenamer/main/resources/style/searching_and_replacing_window.css",
+					"search and replace",
 					(fxmlLoader, stage) -> {
 						SearchingAndReplacingManipulatorController searchingAndReplacingManipulatorController = (SearchingAndReplacingManipulatorController) fxmlLoader
 								.getController();
@@ -116,34 +110,39 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	public void handleOnClickAddingButton() {
 		FileChooser fileChooser = new FileChooser();
 		List<File> fileList = fileChooser.showOpenMultipleDialog(this.stage);
-		List<Path> pathList = fileList.stream().map(files -> files.toPath())
-				.collect(Collectors.toList());
-		pathList.forEach(System.out::println);
-		selectedPathList.addAll(pathList.stream()
-				.map(path -> new SelectedPath(path))
-				.collect(Collectors.toList()));
+		if (fileList != null) {
+			List<Path> pathList = fileList.stream()
+					.map(files -> files.toPath()).collect(Collectors.toList());
+			selectedPathList.addAll(pathList.stream()
+					.map(path -> new SelectedPath(path))
+					.collect(Collectors.toList()));
+
+			this.selectedPathList.forEach(selectedPath -> this.oldSelectedList
+					.add(selectedPath));
+		}
 	}
 
 	@FXML
 	public void handleRenameButton() {
-		List<SelectedPath> newSelectedPathList = new ArrayList<>();
-		this.outputTextArea.clear();
+		if (this.selectedPathList.size() != 0) {
+			List<SelectedPath> newSelectedPathList = new ArrayList<>();
+			this.outputTextArea.clear();
 
-		this.selectedPathList
-				.forEach(selectedPath -> {
-					try {
-						Path beforeFullPath = selectedPath.getBeforeFullPath();
-						Path afterFullPath = selectedPath.getAfterFullPath();
-						newSelectedPathList.add(new SelectedPath(afterFullPath,
-								afterFullPath));
-						Files.move(beforeFullPath, afterFullPath);
-						this.outputTextArea.appendText(selectedPath.toString()
-								+ "\n\n");
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				});
-		this.selectedPathList.setAll(newSelectedPathList);
+			this.selectedPathList.forEach(selectedPath -> {
+				try {
+					Path beforeFullPath = selectedPath.getBeforeFullPath();
+					Path afterFullPath = selectedPath.getAfterFullPath();
+					newSelectedPathList.add(new SelectedPath(afterFullPath,
+							afterFullPath));
+					Files.move(beforeFullPath, afterFullPath);
+					this.outputTextArea.appendText(selectedPath.toString()
+							+ "\n\n");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+			this.selectedPathList.setAll(newSelectedPathList);
+		}
 
 	}
 
@@ -151,6 +150,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	public void handleClearButton() {
 		this.selectedPathList.clear();
 		this.outputTextArea.clear();
+		this.outputTextArea.setText("output console");
 	}
 
 	@FXML
@@ -164,7 +164,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 		try {
 			new WindowLoader(
 					"seeurrenamer/main/view/CaseManipulator.fxml",
-					"manipulator",
+					"convert case",
 					(fxmlLoader, stage) -> {
 						CaseConverterController caseConverterController = (CaseConverterController) fxmlLoader
 								.getController();
@@ -183,7 +183,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 		try {
 			new WindowLoader(
 					"seeurrenamer/main/view/NumberingManipulator.fxml",
-					"manipulator",
+					"give sequence",
 					(fxmlLoader, stage) -> {
 						NumberingManipulatorController numberingManipulatorController = (NumberingManipulatorController) fxmlLoader
 								.getController();
@@ -195,6 +195,44 @@ public class SeeurRenamerMainWindowController implements Initializable {
 			e.printStackTrace();
 		}
 
+	}
+
+	@FXML
+	public void handleRemovingCharacterMenuItem() {
+		try {
+			new WindowLoader(
+					"seeurrenamer/main/view/RemovingCharManipulator.fxml",
+					"remove character",
+					(fxmlLoader, stage) -> {
+						RemovingCharManipulatorController removingCharManipulatorController = (RemovingCharManipulatorController) fxmlLoader
+								.getController();
+						removingCharManipulatorController
+								.setSelectedPathList(this.selectedPathList);
+
+					}).show(WindowLoader.SHOW_AND_WAITING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@FXML
+	public void handleBackButton() {
+		this.selectedPathList.clear();
+		this.oldSelectedList.forEach(selectedPath -> this.selectedPathList
+				.add(new SelectedPath(selectedPath.getBeforeFullPath(),
+						selectedPath.getAfterFullPath())));
+	}
+
+	@FXML
+	public void handleAboutButton() {
+		this.outputTextArea.clear();
+		BufferedReader bufferedReader = new BufferedReader(
+				new InputStreamReader(
+						ClassLoader
+								.getSystemResourceAsStream("seeurrenamer/main/resources/text/license.txt")));
+		bufferedReader.lines().forEach(
+				line -> this.outputTextArea.appendText(line + "\n"));
 	}
 
 	public void setStage(Stage stage) {

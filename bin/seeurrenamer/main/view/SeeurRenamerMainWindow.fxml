@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -7,30 +9,45 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="543.0" minWidth="665.0" prefHeight="543.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seeurrenamer.main.controller.SeeurRenamerMainWindowController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+	minHeight="543.0" minWidth="665.0" prefHeight="543.0" prefWidth="665.0"
+	xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="seeurrenamer.main.controller.SeeurRenamerMainWindowController">
 	<columnConstraints>
-		<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+		<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"
+			maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
 	</columnConstraints>
 	<rowConstraints>
-		<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="272.0" valignment="CENTER" vgrow="ALWAYS" />
-		<RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-		<RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
-		<RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="1.7976931348623157E308"
+			minHeight="10.0" prefHeight="272.0" valignment="CENTER" vgrow="ALWAYS" />
+		<RowConstraints maxHeight="272.0" minHeight="10.0"
+			prefHeight="46.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="220.0" minHeight="10.0"
+			prefHeight="84.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="114.0" minHeight="10.0"
+			prefHeight="87.0" vgrow="SOMETIMES" />
 	</rowConstraints>
 	<children>
 		<GridPane>
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="82.0" />
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="583.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0"
+					minWidth="10.0" prefWidth="82.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
+					minWidth="10.0" prefWidth="583.0" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="331.0" vgrow="ALWAYS" />
+				<RowConstraints maxHeight="1.7976931348623157E308"
+					minHeight="10.0" prefHeight="331.0" vgrow="ALWAYS" />
 			</rowConstraints>
 			<children>
-				<TableView fx:id="selectedPathTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="331.0" prefWidth="337.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+				<TableView fx:id="selectedPathTableView" maxHeight="1.7976931348623157E308"
+					maxWidth="1.7976931348623157E308" prefHeight="331.0" prefWidth="337.0"
+					GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
 					<columns>
-						<TableColumn fx:id="beforeTableColumn" prefWidth="192.0" text="before" />
-						<TableColumn fx:id="afterTableColumn" prefWidth="200.0" text="after" />
+						<TableColumn fx:id="beforeTableColumn" prefWidth="192.0"
+							text="before" />
+						<TableColumn fx:id="afterTableColumn" prefWidth="200.0"
+							text="after" />
 					</columns>
 					<GridPane.margin>
 						<Insets bottom="20.0" left="20.0" right="30.0" top="20.0" />
@@ -39,39 +56,81 @@
 						<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 					</columnResizePolicy>
 				</TableView>
-				<VBox prefHeight="281.0" prefWidth="196.0" spacing="30.0">
+				<VBox spacing="20.0">
 					<children>
-						<Button mnemonicParsing="false" onAction="#handleOnClickAddingButton" text="+" />
-						<Button mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="26.0" prefWidth="46.0" text="-" />
-						<Button mnemonicParsing="false" onAction="#handleClearButton" prefHeight="26.0" prefWidth="48.0" text="cl" />
-						<Button mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" text="i" />
+						<Button id="adding-button" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#handleOnClickAddingButton" prefHeight="50.0"
+							prefWidth="52.0">
+							<cursor>
+								<Cursor fx:constant="OPEN_HAND" />
+							</cursor>
+						</Button>
+						<Button id="removing-button" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#handleDeleteButton" prefHeight="42.0" prefWidth="63.0">
+							<cursor>
+								<Cursor fx:constant="OPEN_HAND" />
+							</cursor>
+						</Button>
+						<Button id="clearing-button" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#handleClearButton" prefHeight="34.0" prefWidth="52.0">
+							<cursor>
+								<Cursor fx:constant="OPEN_HAND" />
+							</cursor>
+						</Button>
+						<Button id="undoing-button" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#handleBackButton"
+							prefHeight="30.0" prefWidth="52.0">
+							<cursor>
+								<Cursor fx:constant="OPEN_HAND" />
+							</cursor>
+						</Button>
+						<Button id="about-button" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#handleAboutButton" prefHeight="49.0" prefWidth="52.0">
+							<cursor>
+								<Cursor fx:constant="OPEN_HAND" />
+							</cursor>
+						</Button>
 					</children>
+					<padding>
+						<Insets top="20.0" />
+					</padding>
 					<GridPane.margin>
-						<Insets bottom="20.0" left="30.0" right="76.0" top="20.0" />
+						<Insets left="30.0" />
 					</GridPane.margin>
 				</VBox>
 			</children>
 		</GridPane>
 		<GridPane GridPane.rowIndex="1">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="313.0" />
-				<ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="352.0" />
+				<ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308"
+					minWidth="10.0" prefWidth="352.0" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+				<RowConstraints maxHeight="1.7976931348623157E308"
+					minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
 			</rowConstraints>
 			<children>
-				<ComboBox fx:id="renameMethodComboBox" prefHeight="26.0" prefWidth="170.0" GridPane.halignment="RIGHT">
-					<GridPane.margin>
-						<Insets right="40.0" />
-					</GridPane.margin>
-				</ComboBox>
-				<SplitMenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="181.0" text="operation" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+				<SplitMenuButton mnemonicParsing="false" prefHeight="26.0"
+					prefWidth="181.0" text="operation" GridPane.halignment="RIGHT">
 					<items>
-						<MenuItem mnemonicParsing="false" onAction="#handleOnInsAndOvMenuItem" text="insert or overwrite" />
-						<MenuItem mnemonicParsing="false" onAction="#handleSearchAndReplaceMenuItem" text="search and replace" />
-						<MenuItem mnemonicParsing="false" onAction="#handleCaseConverterMenuItem" text="convert case" />
-						<MenuItem mnemonicParsing="false" onAction="#handleNumberingFormatMenuItem" text="give sequences" />
+						<MenuItem mnemonicParsing="false" onAction="#handleOnInsAndOvMenuItem"
+							text="insert or overwrite" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem mnemonicParsing="false"
+							onAction="#handleSearchAndReplaceMenuItem" text="search and replace" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem mnemonicParsing="false" onAction="#handleCaseConverterMenuItem"
+							text="convert case" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem mnemonicParsing="false"
+							onAction="#handleNumberingFormatMenuItem" text="give sequences" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem mnemonicParsing="false"
+							onAction="#handleRemovingCharacterMenuItem" text="remove character" />
 					</items>
 					<GridPane.margin>
 						<Insets right="30.0" />
@@ -81,26 +140,29 @@
 		</GridPane>
 		<GridPane GridPane.rowIndex="3">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+					prefWidth="100.0" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Button mnemonicParsing="false" onAction="#handleRenameButton" text="rename">
+				<Button id="rename-button" mnemonicParsing="false"
+					onAction="#handleRenameButton" prefHeight="33.0" prefWidth="59.0"
+					GridPane.halignment="CENTER">
 					<GridPane.margin>
 						<Insets left="30.0" />
 					</GridPane.margin>
-				</Button>
-				<Button mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="exit" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-					<GridPane.margin>
-						<Insets right="30.0" />
-					</GridPane.margin>
+					<cursor>
+						<Cursor fx:constant="OPEN_HAND" />
+					</cursor>
 				</Button>
 			</children>
 		</GridPane>
-		<TextArea fx:id="outputTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+		<TextArea fx:id="outputTextArea" editable="false" prefHeight="84.0"
+			prefWidth="553.0" text="output console" wrapText="true"
+			GridPane.rowIndex="2">
 			<GridPane.margin>
 				<Insets left="30.0" right="30.0" />
 			</GridPane.margin>
