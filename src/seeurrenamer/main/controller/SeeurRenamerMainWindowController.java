@@ -84,14 +84,21 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
+			printErrorToConsoleOutput(e);
 			e.printStackTrace();
 		}
 
 	}
 
+	private void printErrorToConsoleOutput(Exception e) {
+		this.outputTextArea.setStyle("-fx-text-fill: red");
+		this.outputTextArea.setText(e.getMessage());
+	}
+
 	@FXML
 	public void handleSearchAndReplaceMenuItem() {
 		try {
+			this.outputTextArea.setStyle("-fx-text-fill: green");
 			new WindowLoader(
 					"seeurrenamer/main/view/SearchAndReplaceManipulator.fxml",
 					"seeurrenamer/main/resources/style/searching_and_replacing_window.css",
@@ -104,13 +111,15 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
-			e.printStackTrace();
+			printErrorToConsoleOutput(e);
 		}
 
 	}
 
 	@FXML
 	public void handleOnClickAddingButton() {
+
+		this.outputTextArea.setStyle("-fx-text-fill: green");
 		FileChooser fileChooser = new FileChooser();
 		List<File> fileList = fileChooser.showOpenMultipleDialog(this.stage);
 		if (fileList != null) {
@@ -127,6 +136,9 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 	@FXML
 	public void handleRenameButton() {
+
+
+		this.outputTextArea.setStyle("-fx-text-fill: green");
 		if (this.selectedPathList.size() != 0) {
 			List<SelectedPath> newSelectedPathList = new ArrayList<>();
 			this.outputTextArea.clear();
@@ -141,7 +153,9 @@ public class SeeurRenamerMainWindowController implements Initializable {
 					this.outputTextArea.appendText(selectedPath.toString()
 							+ "\n\n");
 				} catch (Exception e) {
+					printErrorToConsoleOutput(e);
 					e.printStackTrace();
+
 				}
 			});
 			this.selectedPathList.setAll(newSelectedPathList);
@@ -151,6 +165,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 	@FXML
 	public void handleClearButton() {
+		this.outputTextArea.setStyle("-fx-text-fill: green");
+
 		this.selectedPathList.clear();
 		this.outputTextArea.clear();
 		this.outputTextArea.setText("output console");
@@ -176,6 +192,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
+			printErrorToConsoleOutput(e);
 			e.printStackTrace();
 		}
 
@@ -195,6 +212,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
+			printErrorToConsoleOutput(e);
 			e.printStackTrace();
 		}
 
@@ -214,6 +232,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
+			printErrorToConsoleOutput(e);
 			e.printStackTrace();
 		}
 
@@ -229,6 +248,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 	@FXML
 	public void handleAboutButton() {
+
+		this.outputTextArea.setStyle("-fx-text-fill: green");
 		this.outputTextArea.clear();
 		BufferedReader bufferedReader = new BufferedReader(
 				new InputStreamReader(

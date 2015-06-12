@@ -23,9 +23,9 @@
 		<RowConstraints maxHeight="272.0" minHeight="10.0"
 			prefHeight="46.0" vgrow="SOMETIMES" />
 		<RowConstraints maxHeight="220.0" minHeight="10.0"
-			prefHeight="131.0" vgrow="SOMETIMES" />
+			prefHeight="124.0" vgrow="SOMETIMES" />
 		<RowConstraints maxHeight="114.0" minHeight="10.0"
-			prefHeight="40.0" vgrow="SOMETIMES" />
+			prefHeight="47.0" vgrow="SOMETIMES" />
 	</rowConstraints>
 	<children>
 		<GridPane>
@@ -63,7 +63,7 @@
 					<children>
 						<Button id="adding-button" alignment="CENTER"
 							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-							onAction="#handleOnClickAddingButton" prefHeight="50.0"
+							onAction="#handleOnClickAddingButton" prefHeight="32.0"
 							prefWidth="52.0">
 							<cursor>
 								<Cursor fx:constant="OPEN_HAND" />
@@ -74,7 +74,7 @@
 						</Button>
 						<Button id="removing-button" alignment="CENTER"
 							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-							onAction="#handleDeleteButton" prefHeight="42.0" prefWidth="63.0">
+							onAction="#handleDeleteButton" prefHeight="32.0" prefWidth="52.0">
 							<cursor>
 								<Cursor fx:constant="OPEN_HAND" />
 							</cursor>
@@ -84,7 +84,7 @@
 						</Button>
 						<Button id="clearing-button" alignment="CENTER"
 							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-							onAction="#handleClearButton" prefHeight="34.0" prefWidth="52.0">
+							onAction="#handleClearButton" prefHeight="35.0" prefWidth="52.0">
 							<cursor>
 								<Cursor fx:constant="OPEN_HAND" />
 							</cursor>
@@ -104,7 +104,7 @@
 						</Button>
 						<Button id="about-button" alignment="CENTER"
 							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-							onAction="#handleAboutButton" prefHeight="49.0" prefWidth="52.0">
+							onAction="#handleAboutButton" prefHeight="33.0" prefWidth="52.0">
 							<cursor>
 								<Cursor fx:constant="OPEN_HAND" />
 							</cursor>
