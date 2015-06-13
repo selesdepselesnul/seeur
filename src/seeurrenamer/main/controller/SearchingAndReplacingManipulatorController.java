@@ -37,8 +37,8 @@ public class SearchingAndReplacingManipulatorController {
 
 	}
 
-	public void setSelectedPathList(ObservableList<PairPath> selectedPathList) {
-		this.pairPathList = selectedPathList;
+	public void setPairPathList(ObservableList<PairPath> pairPathList) {
+		this.pairPathList = pairPathList;
 	}
 
 	@FXML

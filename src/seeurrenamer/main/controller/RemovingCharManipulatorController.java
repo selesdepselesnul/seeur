@@ -41,8 +41,8 @@ public class RemovingCharManipulatorController implements Initializable {
 						0, Integer.MAX_VALUE, 0));
 	}
 
-	public void setSelectedPathList(ObservableList<PairPath> selectedPathList) {
-		this.pairPathList = selectedPathList;
+	public void setPairPathList(ObservableList<PairPath> pairPathList) {
+		this.pairPathList = pairPathList;
 	}
 
 	@FXML

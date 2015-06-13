@@ -10,20 +10,6 @@ public class RegexRenaming implements Function<Path, Path> {
 	private boolean isCaseInsensitive;
 	private String replacer;
 
-	public RegexRenaming(String regex) {
-		this.regex = regex;
-	}
-
-	public RegexRenaming(String regex, boolean isCaseInsensitive) {
-		this.regex = regex;
-		this.isCaseInsensitive = isCaseInsensitive;
-	}
-
-	public RegexRenaming(String regex, String replacer) {
-		this.regex = regex;
-		this.replacer = replacer;
-	}
-
 	public RegexRenaming(String regex, String replacer,
 			boolean isCaseInsensitive) {
 		this.regex = regex;

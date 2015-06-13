@@ -10,24 +10,23 @@ import seeurrenamer.main.model.PairPath;
 
 public class PathsRenamer {
 
-	private Path extractNewPath(PairPath selectedPath, Path newPathName) {
-		return Paths.get(selectedPath.getBeforeFullPath().getParent()
-				.toString()
+	private Path extractNewPath(PairPath pairPath, Path newPathName) {
+		return Paths.get(pairPath.getBeforeFullPath().getParent().toString()
 				+ "/" + newPathName.toString());
 	}
 
-	public List<PairPath> rename(List<PairPath> pathList,
+	public List<PairPath> rename(List<PairPath> pairPathList,
 			Function<Path, Path> renamingMethod) {
-		List<PairPath> pairPathList = new ArrayList<>();
+		List<PairPath> newPairPathList = new ArrayList<>();
 
-		pathList.stream().forEach(
+		pairPathList.stream().forEach(
 				pairPath -> {
 					Path newFullPath = extractNewPath(pairPath,
 							renamingMethod.apply(pairPath.getBefore()));
-					pairPathList.add(new PairPath(pairPath.getBeforeFullPath(),
+					newPairPathList.add(new PairPath(pairPath.getBeforeFullPath(),
 							newFullPath));
 				});
-		return pairPathList;
+		return newPairPathList;
 	}
 
 }

@@ -29,7 +29,7 @@ public class InsertOverwriteManipulatorController implements Initializable {
 	@FXML
 	private Spinner<Integer> indexSpinner;
 
-	private ObservableList<PairPath> selectedPathList;
+	private ObservableList<PairPath> pairPathList;
 
 	private Stage stage;
 
@@ -37,16 +37,16 @@ public class InsertOverwriteManipulatorController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		this.operationModeComboBox.getItems().setAll(
-				PositionalRenaming.INSERT_OPERATION,
-				PositionalRenaming.OVERWRITE_OPERATION);
+				PositionalRenaming.INSERTION_OPERATION,
+				PositionalRenaming.OVERWRITEN_OPERATION);
 
 		this.directionComboBox.getItems().setAll(PositionalRenaming.LEFT_SIDE,
 				PositionalRenaming.RIGHT_SIDE);
 
 		this.operationModeComboBox
-				.setValue(PositionalRenaming.INSERT_OPERATION);
-
+				.setValue(PositionalRenaming.INSERTION_OPERATION);
 		this.directionComboBox.setValue(PositionalRenaming.LEFT_SIDE);
 
 		this.indexSpinner
@@ -58,12 +58,12 @@ public class InsertOverwriteManipulatorController implements Initializable {
 	@FXML
 	public void handleRenameOperation() {
 		List<PairPath> newPairPathList = this.pathsRenamer
-				.rename(this.selectedPathList,
+				.rename(this.pairPathList,
 						new PositionalRenaming(this.operationModeComboBox
 								.getValue(), this.directionComboBox.getValue(),
 								this.indexSpinner.getValue(),
 								this.newStringTextField.getText()));
-		this.selectedPathList.setAll(newPairPathList);
+		this.pairPathList.setAll(newPairPathList);
 	}
 
 	@FXML
@@ -71,8 +71,8 @@ public class InsertOverwriteManipulatorController implements Initializable {
 		this.stage.close();
 	}
 
-	public void setSelectedPathList(ObservableList<PairPath> selectedPathList) {
-		this.selectedPathList = selectedPathList;
+	public void setPairPathList(ObservableList<PairPath> pairPathList) {
+		this.pairPathList = pairPathList;
 
 	}
 

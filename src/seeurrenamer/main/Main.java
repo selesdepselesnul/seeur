@@ -2,7 +2,7 @@ package seeurrenamer.main;
 
 import java.io.IOException;
 
-import seeurrenamer.main.controller.SeeurRenamerMainWindowController;
+import seeurrenamer.main.controller.SeeurMainWindowController;
 import seeurrenamer.main.util.WindowLoader;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -12,13 +12,13 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			WindowLoader windowLoader = new WindowLoader(
-					"seeurrenamer/main/view/SeeurRenamerMainWindow.fxml",
+					"seeurrenamer/main/view/SeeurMainWindow.fxml",
 					"seeurrenamer/main/resources/style/seeur_renamer_main_window.css",
 					"SEEUR ~BETA~",
 					(fxmlLoader, stage) -> {
-						SeeurRenamerMainWindowController seeurRenamerMainWindowController = (SeeurRenamerMainWindowController) fxmlLoader
+						SeeurMainWindowController seeurMainWindowController = (SeeurMainWindowController) fxmlLoader
 								.getController();
-						seeurRenamerMainWindowController.setStage(primaryStage);
+						seeurMainWindowController.setStage(primaryStage);
 					});
 			windowLoader.setResizable(true);
 			windowLoader.show(WindowLoader.SHOW_ONLY);

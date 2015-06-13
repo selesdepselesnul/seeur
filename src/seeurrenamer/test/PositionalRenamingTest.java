@@ -31,7 +31,7 @@ public class PositionalRenamingTest {
 	@Test
 	public void testRenameWithLeftAndInsert() {
 		PositionalRenaming positionalPathRenamer = new PositionalRenaming(
-				PositionalRenaming.INSERT_OPERATION,
+				PositionalRenaming.INSERTION_OPERATION,
 				PositionalRenaming.LEFT_SIDE, 4, "an");
 
 		List<PairPath> expectedSelectedPaths = Arrays.asList(
@@ -46,7 +46,7 @@ public class PositionalRenamingTest {
 	@Test
 	public void testRenameWithRightAndInsert() {
 		PositionalRenaming positionalPathRenamer = new PositionalRenaming(
-				PositionalRenaming.INSERT_OPERATION,
+				PositionalRenaming.INSERTION_OPERATION,
 				PositionalRenaming.RIGHT_SIDE, 3, "an");
 
 		List<PairPath> expectedSelectedPaths = Arrays.asList(
@@ -61,7 +61,7 @@ public class PositionalRenamingTest {
 	@Test
 	public void testRenameWithLeftPositionAndOverwrite() {
 		PositionalRenaming positionalPathRenamer = new PositionalRenaming(
-				PositionalRenaming.OVERWRITE_OPERATION,
+				PositionalRenaming.OVERWRITEN_OPERATION,
 				PositionalRenaming.LEFT_SIDE, 4, "an");
 
 		List<PairPath> selectedPathList = Arrays.asList(
@@ -78,7 +78,7 @@ public class PositionalRenamingTest {
 	@Test
 	public void testRenameWithRightPositionAndOverwrite() {
 		PositionalRenaming positionalPathRenamer = new PositionalRenaming(
-				PositionalRenaming.OVERWRITE_OPERATION,
+				PositionalRenaming.OVERWRITEN_OPERATION,
 				PositionalRenaming.RIGHT_SIDE, 4, "ole");
 
 		List<PairPath> selectedPathList = Arrays.asList(

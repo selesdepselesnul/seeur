@@ -8,8 +8,8 @@ public class PositionalRenaming implements Function<Path, Path> {
 
 	public static final String RIGHT_SIDE = "from right";
 	public static final String LEFT_SIDE = "from left";
-	public static final String INSERT_OPERATION = "insert";
-	public static final String OVERWRITE_OPERATION = "overwrite";
+	public static final String INSERTION_OPERATION = "insert";
+	public static final String OVERWRITEN_OPERATION = "overwrite";
 	String operation;
 	String direction;
 	private int position;
@@ -27,7 +27,7 @@ public class PositionalRenaming implements Function<Path, Path> {
 	public Path apply(Path path) {
 		Path newPathName = null;
 		String pathString = path.toString();
-		if (this.operation == INSERT_OPERATION) {
+		if (this.operation == INSERTION_OPERATION) {
 			if (this.direction == LEFT_SIDE) {
 
 				String leftSide = pathString.substring(0, this.position);
@@ -42,7 +42,7 @@ public class PositionalRenaming implements Function<Path, Path> {
 						pathString.length());
 				newPathName = Paths.get((leftSide + newString + rightSide));
 			}
-		} else if (this.operation == OVERWRITE_OPERATION) {
+		} else if (this.operation == OVERWRITEN_OPERATION) {
 			if (direction == LEFT_SIDE) {
 
 				String unaffectedString = pathString

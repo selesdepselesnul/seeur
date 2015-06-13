@@ -19,7 +19,7 @@ public class SequenceManipulatorController implements Initializable {
 
 	@FXML
 	private ComboBox<Function<Path, Path>> sequenceComboBox;
-	private ObservableList<PairPath> selectedPathList;
+	private ObservableList<PairPath> pairPathList;
 	private PathsRenamer pathsRenamer;
 
 	@Override
@@ -31,12 +31,12 @@ public class SequenceManipulatorController implements Initializable {
 
 	@FXML
 	public void handleNumberingFormatComboBox() {
-		this.selectedPathList.setAll(this.pathsRenamer.rename(
-				this.selectedPathList, this.sequenceComboBox.getValue()));
+		this.pairPathList.setAll(this.pathsRenamer.rename(
+				this.pairPathList, this.sequenceComboBox.getValue()));
 	}
 
-	public void setSelectedPathList(ObservableList<PairPath> selectedPathList) {
-		this.selectedPathList = selectedPathList;
+	public void setPairPathList(ObservableList<PairPath> pairPathList) {
+		this.pairPathList = pairPathList;
 	}
 
 	public void setPathsRename(PathsRenamer pathsRenamer) {
