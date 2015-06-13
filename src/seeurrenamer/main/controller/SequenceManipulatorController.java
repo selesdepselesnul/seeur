@@ -32,34 +32,6 @@ public class SequenceManipulatorController implements Initializable {
 		sequencerAdder = new SequenceAdder(this.selectedPathList);
 		this.selectedPathList.setAll(sequencerAdder.add(this.sequenceComboBox
 				.getValue()));
-		// List<SelectedPath> newSelectedPathList = new ArrayList<>();
-		// if (this.sequenceComboBox.getValue().equals("1., 2., 3. ...")) {
-		// for (int i = 0; i < this.selectedPathList.size(); i++) {
-		// SelectedPath selectedPath = this.selectedPathList.get(i);
-		// Path newPathName = (Paths.get((i + 1) + "."
-		// + selectedPath.getBefore()));
-		//
-		// newSelectedPathList.add(new SelectedPath(selectedPath
-		// .getBeforeFullPath(), PathRenamer.extractNewPath(
-		// selectedPath, newPathName)));
-		// }
-		// } else if (this.sequenceComboBox.getValue()
-		// .equals("a., b., c., d. ...")) {
-		// char charNumber = 'a';
-		// for (SelectedPath selectedPath : this.selectedPathList) {
-		// Path newPathName = Paths.get(charNumber + "."
-		// + selectedPath.getBefore());
-		//
-		// newSelectedPathList.add(new SelectedPath(selectedPath
-		// .getBeforeFullPath(), PathRenamer.extractNewPath(
-		// selectedPath, newPathName)));
-		// if (charNumber == 'z') {
-		// charNumber = 'a';
-		// }
-		// charNumber++;
-		// }
-		// }
-		// this.selectedPathList.setAll(newSelectedPathList);
 	}
 
 	public void setSelectedPathList(

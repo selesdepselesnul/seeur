@@ -26,7 +26,7 @@ public class SequenceAdderTest {
 	}
 
 	@Test
-	public void testAddWithDecimalSystem() {
+	public void testAddWithDecimalSequence() {
 		Sequence<Integer> decimalSequence = new Sequence<>(1, 3,
 				integer -> integer + 1, "1., 2. , 3. , ...");
 		assertThat(sequenceAdder.add(decimalSequence),
@@ -40,7 +40,7 @@ public class SequenceAdderTest {
 	}
 
 	@Test
-	public void testAddWithAlphabet() {
+	public void testAddWithAlphabetSequence() {
 		Sequence<Character> alphabetSequence = new Sequence<>('a', 'c',
 				character -> ++character, "a., b., c., ...");
 		assertThat(sequenceAdder.add(alphabetSequence),

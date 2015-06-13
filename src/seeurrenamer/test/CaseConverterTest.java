@@ -27,7 +27,7 @@ public class CaseConverterTest {
 	}
 
 	@Test
-	public void testToLower() {
+	public void testConvertWithLowerConverter() {
 		LowerConverter lowerConverter = new LowerConverter();
 		assertThat(pathCaseConverter.convert(lowerConverter),
 				is(equalTo(Arrays.asList(new SelectedPath(Paths
@@ -36,7 +36,7 @@ public class CaseConverterTest {
 	}
 
 	@Test
-	public void testToUpper() {
+	public void testConverWithUpperConverter() {
 		UpperConverter upperConverter = new UpperConverter();
 		assertThat(pathCaseConverter.convert(upperConverter),
 				is(equalTo(Arrays.asList(new SelectedPath(Paths
@@ -45,7 +45,7 @@ public class CaseConverterTest {
 	}
 
 	@Test
-	public void testToUnixStyle() {
+	public void testConvertWithUnixStyleConverter() {
 		UnixStyleConverter unixStyleConverter = new UnixStyleConverter();
 		assertThat(pathCaseConverter.convert(unixStyleConverter),
 				is(equalTo(Arrays.asList(new SelectedPath(Paths
