@@ -49,10 +49,8 @@ public class PositionalPathRenamer extends PathRenamer {
 
 				String unaffectedString = stringPath
 						.substring(0, this.position);
-				System.out.println("unaffected string : " + unaffectedString);
 				String affectedString = stringPath.substring(this.position,
 						stringPath.length());
-				System.out.println("affected string  : " + affectedString);
 				StringBuilder stringBuilder = new StringBuilder(affectedString);
 				stringBuilder.replace(0, newString.length(), newString);
 				newPathName = Paths.get(unaffectedString
@@ -63,10 +61,8 @@ public class PositionalPathRenamer extends PathRenamer {
 				int unaffectedStringEndIndex = (stringPath.length() - this.position) - 1;
 				String unaffectedString = stringPath.substring(0,
 						unaffectedStringEndIndex);
-				System.out.println("unaffected string : " + unaffectedString);
 				String affectedString = stringPath.substring(
 						unaffectedStringEndIndex, stringPath.length());
-				System.out.println("affected string : " + affectedString);
 				StringBuilder stringBuilder = new StringBuilder(affectedString);
 				stringBuilder.replace(0, newString.length(), newString);
 				newPathName = Paths.get(unaffectedString
