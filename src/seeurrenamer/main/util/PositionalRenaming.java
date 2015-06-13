@@ -2,10 +2,9 @@ package seeurrenamer.main.util;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.function.Function;
 
-import seeurrenamer.main.model.SelectedPath;
-
-public class PositionalPathRenamer extends PathRenamer {
+public class PositionalRenaming implements Function<Path, Path> {
 
 	public static final String RIGHT_SIDE = "from right";
 	public static final String LEFT_SIDE = "from left";
@@ -14,55 +13,53 @@ public class PositionalPathRenamer extends PathRenamer {
 	String operation;
 	String direction;
 	private int position;
+	private String newString;
 
-	public PositionalPathRenamer(String operation, String direction,
-			int position) {
+	public PositionalRenaming(String operation, String direction, int position,
+			String newString) {
 		this.operation = operation;
 		this.direction = direction;
 		this.position = position;
+		this.newString = newString;
 	}
 
 	@Override
-	protected Path renamePath(SelectedPath selectedPath, String newString) {
-
+	public Path apply(Path path) {
 		Path newPathName = null;
+		String pathString = path.toString();
 		if (this.operation == INSERT_OPERATION) {
 			if (this.direction == LEFT_SIDE) {
-				Path path = selectedPath.getBefore();
 
-				String leftSide = path.toString().substring(0, this.position);
-				String rightSide = path.toString().substring(this.position,
-						path.toString().length());
+				String leftSide = pathString.substring(0, this.position);
+				String rightSide = pathString.substring(this.position,
+						pathString.length());
 
 				newPathName = Paths.get((leftSide + newString + rightSide));
 			} else {
-				Path path = selectedPath.getBefore();
-				int bound = path.toString().length() - this.position;
-				String leftSide = path.toString().substring(0, bound);
-				String rightSide = path.toString().substring(bound,
-						path.toString().length());
+				int bound = pathString.length() - this.position;
+				String leftSide = pathString.substring(0, bound);
+				String rightSide = pathString.substring(bound,
+						pathString.length());
 				newPathName = Paths.get((leftSide + newString + rightSide));
 			}
 		} else if (this.operation == OVERWRITE_OPERATION) {
 			if (direction == LEFT_SIDE) {
-				String stringPath = selectedPath.getBefore().toString();
 
-				String unaffectedString = stringPath
+				String unaffectedString = pathString
 						.substring(0, this.position);
-				String affectedString = stringPath.substring(this.position,
-						stringPath.length());
+				String affectedString = pathString.substring(this.position,
+						pathString.length());
 				StringBuilder stringBuilder = new StringBuilder(affectedString);
 				stringBuilder.replace(0, newString.length(), newString);
 				newPathName = Paths.get(unaffectedString
 						+ stringBuilder.toString());
 			} else {
 
-				String stringPath = selectedPath.getBefore().toString();
-				int unaffectedStringEndIndex = (stringPath.length() - this.position) - 1;
-				String unaffectedString = stringPath.substring(0,
+				int unaffectedStringEndIndex = (pathString.length() - this.position) - 1;
+				String unaffectedString = pathString.substring(0,
 						unaffectedStringEndIndex);
-				String affectedString = stringPath.substring(
-						unaffectedStringEndIndex, stringPath.length());
+				String affectedString = pathString.substring(
+						unaffectedStringEndIndex, pathString.length());
 				StringBuilder stringBuilder = new StringBuilder(affectedString);
 				stringBuilder.replace(0, newString.length(), newString);
 				newPathName = Paths.get(unaffectedString

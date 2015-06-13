@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-import seeurrenamer.main.model.SelectedPath;
+import seeurrenamer.main.model.PairPath;
+import seeurrenamer.main.util.PathsRenamer;
 import seeurrenamer.main.util.WindowLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,13 +32,13 @@ import javafx.stage.Stage;
 public class SeeurRenamerMainWindowController implements Initializable {
 
 	@FXML
-	private TableView<SelectedPath> selectedPathTableView;
+	private TableView<PairPath> selectedPathTableView;
 
 	@FXML
-	private TableColumn<SelectedPath, Path> beforeTableColumn;
+	private TableColumn<PairPath, Path> beforeTableColumn;
 
 	@FXML
-	private TableColumn<SelectedPath, Path> afterTableColumn;
+	private TableColumn<PairPath, Path> afterTableColumn;
 
 	@FXML
 	private TitledPane manipulatorTitledPane;
@@ -49,16 +50,20 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	private TextArea outputTextArea;
 
 	@FXML
-	private List<SelectedPath> oldSelectedList;
+	private List<PairPath> oldSelectedList;
 
 	private Stage stage;
 
-	private ObservableList<SelectedPath> selectedPathList;
+	private ObservableList<PairPath> selectedPathList;
+
+	private PathsRenamer pathsRenamer;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		this.pathsRenamer = new PathsRenamer();
 		this.oldSelectedList = new ArrayList<>();
+
 		this.beforeTableColumn.setCellValueFactory(new PropertyValueFactory<>(
 				"before"));
 		this.afterTableColumn.setCellValueFactory(new PropertyValueFactory<>(
@@ -85,6 +90,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 						insertOverwriteManipulatorController
 								.setSelectedPathList(this.selectedPathList);
 						insertOverwriteManipulatorController.setStage(stage);
+						insertOverwriteManipulatorController
+								.setPathsRenamer(this.pathsRenamer);
 
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
@@ -119,6 +126,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 								.getController();
 						searchingAndReplacingManipulatorController
 								.setSelectedPathList(this.selectedPathList);
+						searchingAndReplacingManipulatorController
+								.setPathsRenamer(this.pathsRenamer);
 
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
@@ -138,7 +147,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 			List<Path> pathList = fileList.stream()
 					.map(files -> files.toPath()).collect(Collectors.toList());
 			selectedPathList.addAll(pathList.stream()
-					.map(path -> new SelectedPath(path))
+					.map(path -> new PairPath(path))
 					.collect(Collectors.toList()));
 
 			this.selectedPathList.forEach(selectedPath -> this.oldSelectedList
@@ -151,14 +160,14 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 		if (this.selectedPathList.size() != 0) {
 			this.outputTextArea.setStyle("-fx-text-fill: green");
-			List<SelectedPath> newSelectedPathList = new ArrayList<>();
+			List<PairPath> newSelectedPathList = new ArrayList<>();
 			this.outputTextArea.clear();
 
 			this.selectedPathList.forEach(selectedPath -> {
 				try {
 					Path beforeFullPath = selectedPath.getBeforeFullPath();
 					Path afterFullPath = selectedPath.getAfterFullPath();
-					newSelectedPathList.add(new SelectedPath(afterFullPath,
+					newSelectedPathList.add(new PairPath(afterFullPath,
 							afterFullPath));
 					Files.move(beforeFullPath, afterFullPath);
 					this.outputTextArea.appendText("rename : "
@@ -187,8 +196,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 
 	@FXML
 	public void handleDeleteButton() {
-		SelectedPath selectedPath = this.selectedPathTableView
-				.getSelectionModel().getSelectedItem();
+		PairPath selectedPath = this.selectedPathTableView.getSelectionModel()
+				.getSelectedItem();
 		if (selectedPath != null) {
 			this.outputTextArea.setStyle("-fx-text-fill: green");
 			this.outputTextArea.appendText("delete from table : "
@@ -209,6 +218,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 								.getController();
 						caseConverterController
 								.setSelectedPathList(this.selectedPathList);
+						caseConverterController
+								.setPathsRenamer(this.pathsRenamer);
 
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
@@ -230,7 +241,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 								.getController();
 						sequenceManipulatorController
 								.setSelectedPathList(this.selectedPathList);
-
+						sequenceManipulatorController
+								.setPathsRename(this.pathsRenamer);
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
 			printErrorToConsoleOutput(e);
@@ -251,6 +263,8 @@ public class SeeurRenamerMainWindowController implements Initializable {
 								.getController();
 						removingCharManipulatorController
 								.setSelectedPathList(this.selectedPathList);
+						removingCharManipulatorController
+								.setPathsRenamer(this.pathsRenamer);
 
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
@@ -264,7 +278,7 @@ public class SeeurRenamerMainWindowController implements Initializable {
 	public void handleBackButton() {
 		this.selectedPathList.clear();
 		this.oldSelectedList.forEach(selectedPath -> this.selectedPathList
-				.add(new SelectedPath(selectedPath.getBeforeFullPath(),
+				.add(new PairPath(selectedPath.getBeforeFullPath(),
 						selectedPath.getAfterFullPath())));
 	}
 

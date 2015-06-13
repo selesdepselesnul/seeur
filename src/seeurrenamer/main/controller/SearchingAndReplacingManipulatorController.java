@@ -2,8 +2,9 @@ package seeurrenamer.main.controller;
 
 import java.io.IOException;
 
-import seeurrenamer.main.model.SelectedPath;
-import seeurrenamer.main.util.RegexPathRenamer;
+import seeurrenamer.main.model.PairPath;
+import seeurrenamer.main.util.PathsRenamer;
+import seeurrenamer.main.util.RegexRenaming;
 import seeurrenamer.main.util.WindowLoader;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,27 +22,23 @@ public class SearchingAndReplacingManipulatorController {
 	@FXML
 	private CheckBox isCaseInsensitiveCheckBox;
 
-	private ObservableList<SelectedPath> selectedPathList;
+	private ObservableList<PairPath> pairPathList;
 
-	private RegexPathRenamer regexPathRenamer;
+	private PathsRenamer pathsRenamer;
 
 	@FXML
 	public void handleOnWriteString() {
-		if (this.isCaseInsensitiveCheckBox.isSelected()) {
-			this.regexPathRenamer = new RegexPathRenamer(
-					this.regexTextField.getText(), true);
-		} else {
-			this.regexPathRenamer = new RegexPathRenamer(
-					this.regexTextField.getText());
-		}
-		this.selectedPathList.setAll(regexPathRenamer.rename(
-				this.selectedPathList, this.replacerTextField.getText()));
+		RegexRenaming regexRenaming = new RegexRenaming(
+				this.regexTextField.getText(),
+				this.replacerTextField.getText(),
+				this.isCaseInsensitiveCheckBox.isSelected());
+		this.pairPathList.setAll(this.pathsRenamer.rename(
+				this.pairPathList, regexRenaming));
 
 	}
 
-	public void setSelectedPathList(
-			ObservableList<SelectedPath> selectedPathList) {
-		this.selectedPathList = selectedPathList;
+	public void setSelectedPathList(ObservableList<PairPath> selectedPathList) {
+		this.pairPathList = selectedPathList;
 	}
 
 	@FXML
@@ -52,5 +49,9 @@ public class SearchingAndReplacingManipulatorController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void setPathsRenamer(PathsRenamer pathsRenamer) {
+		this.pathsRenamer = pathsRenamer;
 	}
 }

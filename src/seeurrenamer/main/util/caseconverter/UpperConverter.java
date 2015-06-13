@@ -1,8 +1,10 @@
 package seeurrenamer.main.util.caseconverter;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.function.Function;
 
-public class UpperConverter implements Function<String, String> {
+public class UpperConverter implements Function<Path, Path> {
 
 	@Override
 	public String toString() {
@@ -10,8 +12,8 @@ public class UpperConverter implements Function<String, String> {
 	}
 
 	@Override
-	public String apply(String string) {
-		return string.toUpperCase();
+	public Path apply(Path path) {
+		return Paths.get(path.toString().toUpperCase());
 	}
 
 }

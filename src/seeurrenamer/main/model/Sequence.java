@@ -1,8 +1,10 @@
 package seeurrenamer.main.model;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.function.Function;
 
-public class Sequence<T> {
+public class Sequence<T> implements Function<PairPath, Path> {
 
 	private T startValue;
 	private T endValue;
@@ -10,7 +12,8 @@ public class Sequence<T> {
 	private Function<T, T> adderMethod;
 	private String toStringValue;
 
-	public Sequence(T startValue, T endValue, Function<T, T> adderMethod, String toStringValue) {
+	public Sequence(T startValue, T endValue, Function<T, T> adderMethod,
+			String toStringValue) {
 		this.startValue = startValue;
 		this.currentValue = startValue;
 		this.endValue = endValue;
@@ -18,22 +21,21 @@ public class Sequence<T> {
 		this.toStringValue = toStringValue;
 	}
 
-	public void add() {
-		this.currentValue = this.adderMethod.apply(this.currentValue);
-		if (this.currentValue.equals(this.endValue)) {
-			this.currentValue = this.startValue;
-		}
-	}
-
-	public T getCurrentValue() {
-		return this.currentValue;
-	}
-
 	@Override
 	public String toString() {
 		return this.toStringValue;
 	}
-	
-	
+
+	@Override
+	public Path apply(PairPath pairPath) {
+
+		System.out.println(this.currentValue.toString());
+		if (this.currentValue.equals(this.endValue)) {
+			this.currentValue = this.startValue;
+		}
+		this.currentValue = this.adderMethod.apply(this.currentValue);
+		return Paths.get(this.currentValue + "."
+				+ pairPath.getBefore().toString());
+	}
 
 }

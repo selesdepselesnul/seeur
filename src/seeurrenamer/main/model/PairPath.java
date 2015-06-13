@@ -4,17 +4,17 @@ import java.nio.file.Path;
 
 import javafx.beans.property.SimpleObjectProperty;
 
-public class SelectedPath {
+public class PairPath {
 
 	private SimpleObjectProperty<Path> before;
 	private SimpleObjectProperty<Path> after;
 
-	public SelectedPath(Path before, Path after) {
+	public PairPath(Path before, Path after) {
 		this.setBefore(before);
 		this.setAfter(after);
 	}
 
-	public SelectedPath(Path before) {
+	public PairPath(Path before) {
 		this.setBefore(before);
 		this.setAfter(before);
 	}
@@ -52,7 +52,7 @@ public class SelectedPath {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SelectedPath other = (SelectedPath) obj;
+		PairPath other = (PairPath) obj;
 		if (after.get() == null) {
 			if (other.after.get() != null)
 				return false;

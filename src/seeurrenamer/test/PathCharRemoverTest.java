@@ -4,31 +4,47 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import seeurrenamer.main.util.PathCharRemover;
+import seeurrenamer.main.model.PairPath;
+import seeurrenamer.main.util.RemoverRenaming;
+import seeurrenamer.main.util.PathsRenamer;
 
 public class PathCharRemoverTest {
 
-	private PathCharRemover pathCharRemover;
+	private static PathsRenamer pathRenamer;
+	private RemoverRenaming pathCharRemover;
 
-	@Before
-	public void setUp() throws Exception {
-		pathCharRemover = new PathCharRemover();
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		pathRenamer = new PathsRenamer();
 	}
 
 	@Test
 	public void testRemoveFromLeft() {
-		assertThat(this.pathCharRemover.remove(Paths.get("aku adalah"),
-				PathCharRemover.LEFT, 0, 4), is(equalTo(Paths.get("adalah"))));
+		pathCharRemover = new RemoverRenaming(RemoverRenaming.LEFT, 0, 4);
+		List<PairPath> pairPathList = Arrays.asList(new PairPath(Paths
+				.get("/test/aku adalah")));
+		pathRenamer.rename(pairPathList, pathCharRemover);
+		assertThat(pathRenamer.rename(pairPathList, pathCharRemover),
+				is(equalTo(Arrays.asList(new PairPath(pairPathList.get(0)
+						.getBeforeFullPath(), Paths.get("/test/adalah"))))));
 	}
 
 	@Test
 	public void testRemoveFromRight() {
-		assertThat(this.pathCharRemover.remove(Paths.get("aku adalah"),
-				PathCharRemover.RIGHT, 0, 7), is(equalTo(Paths.get("aku"))));
+		pathCharRemover = new RemoverRenaming(RemoverRenaming.RIGHT, 0, 7);
+		List<PairPath> pairPathList = Arrays.asList(new PairPath(Paths
+				.get("/test/aku adalah")));
+		pathRenamer.rename(pairPathList, pathCharRemover);
+		assertThat(pathRenamer.rename(pairPathList, pathCharRemover),
+				is(equalTo(Arrays.asList(new PairPath(pairPathList.get(0)
+						.getBeforeFullPath(), Paths.get("/test/aku"))))));
+
 	}
 
 }
