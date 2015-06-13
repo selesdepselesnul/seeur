@@ -8,13 +8,13 @@
 	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
 	prefHeight="100.0" prefWidth="400.0" text="manipulator"
 	xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="seeurrenamer.main.controller.NumberingManipulatorController">
+	fx:controller="seeurrenamer.main.controller.SequenceManipulatorController">
 	<content>
 		<GridPane prefHeight="47.0" prefWidth="404.0">
 			<children>
 				<Label text="Convert to" />
-				<ComboBox fx:id="numberingFormatComboBox" onAction="#handleNumberingFormatComboBox"
-					prefHeight="25.0" prefWidth="241.0" promptText="numbering format"
+				<ComboBox fx:id="sequenceComboBox" onAction="#handleNumberingFormatComboBox"
+					prefHeight="25.0" prefWidth="241.0" promptText="sequence format"
 					GridPane.columnIndex="1" />
 			</children>
 			<columnConstraints>

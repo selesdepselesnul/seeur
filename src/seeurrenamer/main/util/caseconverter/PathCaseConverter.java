@@ -18,11 +18,11 @@ public class PathCaseConverter {
 		this.selectedPathList = selectedPathList;
 	}
 
-	public List<SelectedPath> convertCase(Function<String, String> caseConverter) {
+	public List<SelectedPath> convert(Function<String, String> convertMethod) {
 		this.newSelectedPathList = new ArrayList<>();
 		this.selectedPathList.stream().forEach(
 				selectedPath -> {
-					Path newPath = Paths.get(caseConverter.apply(selectedPath
+					Path newPath = Paths.get(convertMethod.apply(selectedPath
 							.getBefore().toString()));
 					newSelectedPathList.add(new SelectedPath(selectedPath
 							.getBeforeFullPath(), PathRenamer.extractNewPath(

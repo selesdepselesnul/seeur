@@ -37,12 +37,16 @@ public class InsertOverwriteManipulatorController implements Initializable {
 		this.operationModeComboBox.getItems().setAll(
 				PositionalPathRenamer.INSERT_OPERATION,
 				PositionalPathRenamer.OVERWRITE_OPERATION);
-		this.operationModeComboBox
-				.setValue(PositionalPathRenamer.INSERT_OPERATION);
+
 		this.directionComboBox.getItems().setAll(
 				PositionalPathRenamer.LEFT_SIDE,
 				PositionalPathRenamer.RIGHT_SIDE);
+
+		this.operationModeComboBox
+				.setValue(PositionalPathRenamer.INSERT_OPERATION);
+
 		this.directionComboBox.setValue(PositionalPathRenamer.LEFT_SIDE);
+
 		this.indexSpinner
 				.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
 						0, Integer.MAX_VALUE, 0));
@@ -54,9 +58,9 @@ public class InsertOverwriteManipulatorController implements Initializable {
 		PathRenamer pathRenamer = new PositionalPathRenamer(
 				this.operationModeComboBox.getValue(),
 				this.directionComboBox.getValue(), this.indexSpinner.getValue());
+
 		this.selectedPathList.setAll(pathRenamer.rename(this.selectedPathList,
 				this.newStringTextField.getText()));
-		System.out.println(this.newStringTextField.getText());
 	}
 
 	@FXML

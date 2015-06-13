@@ -223,12 +223,12 @@ public class SeeurRenamerMainWindowController implements Initializable {
 		try {
 			checkIfTableEmpty();
 			new WindowLoader(
-					"seeurrenamer/main/view/NumberingManipulator.fxml",
+					"seeurrenamer/main/view/SequenceManipulator.fxml",
 					"give sequence",
 					(fxmlLoader, stage) -> {
-						NumberingManipulatorController numberingManipulatorController = (NumberingManipulatorController) fxmlLoader
+						SequenceManipulatorController sequenceManipulatorController = (SequenceManipulatorController) fxmlLoader
 								.getController();
-						numberingManipulatorController
+						sequenceManipulatorController
 								.setSelectedPathList(this.selectedPathList);
 
 					}).show(WindowLoader.SHOW_AND_WAITING);

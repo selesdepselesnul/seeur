@@ -39,6 +39,6 @@ public class CaseConverterController implements Initializable {
 		PathCaseConverter pathCaseConverter = new PathCaseConverter(
 				this.selectedPathList);
 		this.selectedPathList.setAll(pathCaseConverter
-				.convertCase(this.caseComboBox.getValue()));
+				.convert(this.caseComboBox.getValue()));
 	}
 }
