@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import seeurrenamer.main.model.PairPath;
@@ -153,29 +154,40 @@ public class SeeurMainWindowController implements Initializable {
 	public void handleRenameButton() {
 
 		if (this.pairPathList.size() != 0) {
-			this.outputConsoleTextArea.setStyle("-fx-text-fill: green");
-			List<PairPath> newPairPathList = new ArrayList<>();
-			this.outputConsoleTextArea.clear();
+			new Thread(
+					() -> {
+						this.outputConsoleTextArea
+								.setStyle("-fx-text-fill: green");
+						List<PairPath> newPairPathList = new ArrayList<>();
+						this.outputConsoleTextArea.clear();
 
-			this.pairPathList.forEach(pairPath -> {
-				try {
-					Path beforeFullPath = pairPath.getBeforeFullPath();
-					Path afterFullPath = pairPath.getAfterFullPath();
-					newPairPathList.add(new PairPath(afterFullPath,
-							afterFullPath));
-					Files.move(beforeFullPath, afterFullPath);
-					this.outputConsoleTextArea.appendText("rename : "
-							+ pairPath.getBeforeFullPath() + "\nto : "
-							+ pairPath.getAfterFullPath() + "\n\n");
-				} catch (Exception e) {
-					printErrorToConsoleOutput(e);
-					e.printStackTrace();
+						pairPathList.forEach(pairPath -> {
+							try {
+								Path beforeFullPath = pairPath
+										.getBeforeFullPath();
+								Path afterFullPath = pairPath
+										.getAfterFullPath();
+								newPairPathList.add(new PairPath(afterFullPath,
+										afterFullPath));
+								Files.move(beforeFullPath, afterFullPath);
+								outputConsoleTextArea.appendText("rename :\n"
+										+ pairPath.getBeforeFullPath()
+										+ "\nto :\n"
+										+ pairPath.getAfterFullPath()
+										+ "\n\n\n");
+								TimeUnit.MILLISECONDS.sleep(100);
+							} catch (Exception e) {
+								printErrorToConsoleOutput(e);
+								e.printStackTrace();
 
-				}
-			});
-			this.pairPathList.setAll(newPairPathList);
+							}
+						});
+						this.pairPathList.setAll(newPairPathList);
+
+						this.outputConsoleTextArea
+								.appendText("\n\n\nfinished renaming all files !\n\n\n");
+					}).start();
 		}
-
 	}
 
 	@FXML
@@ -273,8 +285,8 @@ public class SeeurMainWindowController implements Initializable {
 	public void handleBackButton() {
 		this.pairPathList.clear();
 		this.oldPairPathList.forEach(pairPath -> this.pairPathList
-				.add(new PairPath(pairPath.getBeforeFullPath(),
-						pairPath.getAfterFullPath())));
+				.add(new PairPath(pairPath.getBeforeFullPath(), pairPath
+						.getAfterFullPath())));
 	}
 
 	@FXML
