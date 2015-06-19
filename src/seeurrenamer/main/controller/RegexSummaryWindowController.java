@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,8 +23,8 @@ public class RegexSummaryWindowController implements Initializable {
 					new InputStreamReader(
 							ClassLoader
 									.getSystemResourceAsStream("seeurrenamer/main/resources/text/regex_summary.txt")));
-			bufferedReader.lines().forEach(
-					line -> this.regexSummaryTextArea.appendText(line + "\n"));
+			this.regexSummaryTextArea.setText(bufferedReader.lines().collect(
+					Collectors.joining("\n")));
 			bufferedReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();

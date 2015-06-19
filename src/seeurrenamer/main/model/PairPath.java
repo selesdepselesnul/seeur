@@ -27,11 +27,11 @@ public class PairPath {
 		this.before = new SimpleObjectProperty<>(before);
 	}
 
-	public Path getBefore() {
+	public Path getBeforeFileName() {
 		return this.before.get().getFileName();
 	}
 
-	public Path getAfter() {
+	public Path getAfterFileName() {
 		return this.after.get().getFileName();
 	}
 

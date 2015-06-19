@@ -10,10 +10,11 @@ public class PositionalRenaming implements Function<Path, Path> {
 	public static final String LEFT_SIDE = "from left";
 	public static final String INSERTION_OPERATION = "insert";
 	public static final String OVERWRITEN_OPERATION = "overwrite";
-	String operation;
-	String direction;
-	private int position;
+	private String operation;
+	private String direction;
 	private String newString;
+	private String pathString;
+	private int position;
 
 	public PositionalRenaming(String operation, String direction, int position,
 			String newString) {
@@ -25,48 +26,67 @@ public class PositionalRenaming implements Function<Path, Path> {
 
 	@Override
 	public Path apply(Path path) {
-		Path newPathName = null;
-		String pathString = path.toString();
+		this.pathString = path.toString();
 		if (this.operation == INSERTION_OPERATION) {
 			if (this.direction == LEFT_SIDE) {
-
-				String leftSide = pathString.substring(0, this.position);
-				String rightSide = pathString.substring(this.position,
-						pathString.length());
-
-				newPathName = Paths.get((leftSide + newString + rightSide));
+				return Paths.get(insertLeft());
+			} else if (this.direction == RIGHT_SIDE) {
+				return Paths.get(insertRight());
 			} else {
-				int bound = pathString.length() - this.position;
-				String leftSide = pathString.substring(0, bound);
-				String rightSide = pathString.substring(bound,
-						pathString.length());
-				newPathName = Paths.get((leftSide + newString + rightSide));
+				throw new IllegalArgumentException();
 			}
 		} else if (this.operation == OVERWRITEN_OPERATION) {
 			if (direction == LEFT_SIDE) {
-
-				String unaffectedString = pathString
-						.substring(0, this.position);
-				String affectedString = pathString.substring(this.position,
-						pathString.length());
-				StringBuilder stringBuilder = new StringBuilder(affectedString);
-				stringBuilder.replace(0, newString.length(), newString);
-				newPathName = Paths.get(unaffectedString
-						+ stringBuilder.toString());
+				return Paths.get(overwriteLeft());
+			} else if (this.direction == RIGHT_SIDE) {
+				return Paths.get(overwriteRight());
 			} else {
-
-				int unaffectedStringEndIndex = (pathString.length() - this.position) - 1;
-				String unaffectedString = pathString.substring(0,
-						unaffectedStringEndIndex);
-				String affectedString = pathString.substring(
-						unaffectedStringEndIndex, pathString.length());
-				StringBuilder stringBuilder = new StringBuilder(affectedString);
-				stringBuilder.replace(0, newString.length(), newString);
-				newPathName = Paths.get(unaffectedString
-						+ stringBuilder.toString());
+				throw new IllegalArgumentException();
 			}
+		} else {
+			throw new IllegalArgumentException();
 		}
-		return newPathName;
 	}
 
+	private String overwriteRight() {
+
+		int lefSideEndIndex = (this.pathString.length() - position) - 1;
+		return overwrite(
+				string -> string.substring(0, lefSideEndIndex),
+				string -> string.substring(lefSideEndIndex, pathString.length()));
+	}
+
+	private String overwriteLeft() {
+		return overwrite(string -> pathString.substring(0, this.position),
+				string -> string.substring(this.position, pathString.length()));
+	}
+
+	private String insertRight() {
+		int bound = pathString.length() - this.position;
+		return insert(string -> string.substring(0, bound),
+				string -> string.substring(bound, pathString.length()));
+	}
+
+	private String insertLeft() {
+		return insert((string) -> string.substring(0, position),
+				(string) -> string.substring(position));
+
+	}
+
+	private String insert(Function<String, String> leftSideExtractor,
+			Function<String, String> rightSideExtractor) {
+
+		return leftSideExtractor.apply(pathString) + newString
+				+ rightSideExtractor.apply(pathString);
+
+	}
+
+	private String overwrite(Function<String, String> leftSideExtractor,
+			Function<String, String> rightSideExtractor) {
+		String leftSide = leftSideExtractor.apply(pathString);
+		StringBuilder rightSideStringBuilder = new StringBuilder(
+				rightSideExtractor.apply(pathString));
+		rightSideStringBuilder.replace(0, newString.length(), newString);
+		return leftSide + rightSideStringBuilder.toString();
+	}
 }

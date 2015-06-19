@@ -20,7 +20,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -43,7 +45,16 @@ public class SeeurMainWindowController implements Initializable {
 	private TextArea outputConsoleTextArea;
 
 	@FXML
-	private List<PairPath> oldPairPathList;
+	private Button renamingButton;
+
+	@FXML
+	private Button clearingButton;
+
+	@FXML
+	private Button removingButton;
+
+	@FXML
+	private SplitMenuButton operationSplitMenuButton;
 
 	private Stage stage;
 
@@ -54,23 +65,23 @@ public class SeeurMainWindowController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		disableControl(true);
+		initColumn();
 		this.pathsRenamer = new PathsRenamer();
-		this.oldPairPathList = new ArrayList<>();
-
-		this.beforeTableColumn.setCellValueFactory(new PropertyValueFactory<>(
-				"before"));
-		this.afterTableColumn.setCellValueFactory(new PropertyValueFactory<>(
-				"after"));
-
 		this.pairPathList = FXCollections.observableArrayList();
 		this.pairPathTableView.setItems(pairPathList);
-
 		this.pairPathTableView
 				.setPlaceholder(new Label("No files are selected"));
-
 		this.outputConsoleTextArea
 				.setText("table is empty, click plus button for add files to table");
 
+	}
+
+	private void initColumn() {
+		this.beforeTableColumn.setCellValueFactory(new PropertyValueFactory<>(
+				"beforeFileName"));
+		this.afterTableColumn.setCellValueFactory(new PropertyValueFactory<>(
+				"afterFileName"));
 	}
 
 	@FXML
@@ -88,7 +99,6 @@ public class SeeurMainWindowController implements Initializable {
 						insertOverwriteManipulatorController.setStage(stage);
 						insertOverwriteManipulatorController
 								.setPathsRenamer(this.pathsRenamer);
-
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
 			printErrorToConsoleOutput(e);
@@ -98,7 +108,7 @@ public class SeeurMainWindowController implements Initializable {
 	}
 
 	private void checkIfTableIsNotEmpty() {
-		if (this.pairPathList.size() != 0) {
+		if (!this.pairPathList.isEmpty()) {
 			this.outputConsoleTextArea.setStyle("-fx-text-fill: green");
 		}
 	}
@@ -110,7 +120,7 @@ public class SeeurMainWindowController implements Initializable {
 	}
 
 	@FXML
-	public void handleSearchAndReplaceMenuItem() {
+	public void handleSearchingAndReplacingMenuItem() {
 		try {
 			checkIfTableIsNotEmpty();
 			new WindowLoader(
@@ -137,68 +147,68 @@ public class SeeurMainWindowController implements Initializable {
 		FileChooser fileChooser = new FileChooser();
 		List<File> fileList = fileChooser.showOpenMultipleDialog(this.stage);
 		if (fileList != null) {
+			disableControl(false);
 			this.outputConsoleTextArea.setStyle("-fx-text-fill: green");
 			this.outputConsoleTextArea.setText("ready for renaming !\n");
 			List<Path> pathList = fileList.stream()
 					.map(files -> files.toPath()).collect(Collectors.toList());
-			pairPathList.addAll(pathList.stream()
+			this.pairPathList.addAll(pathList.stream()
 					.map(path -> new PairPath(path))
 					.collect(Collectors.toList()));
-
-			this.pairPathList.forEach(selectedPath -> this.oldPairPathList
-					.add(selectedPath));
 		}
 	}
 
-	@FXML
-	public void handleRenameButton() {
-
-		if (this.pairPathList.size() != 0) {
-			new Thread(
-					() -> {
-						this.outputConsoleTextArea
-								.setStyle("-fx-text-fill: green");
-						List<PairPath> newPairPathList = new ArrayList<>();
-						this.outputConsoleTextArea.clear();
-
-						pairPathList.forEach(pairPath -> {
-							try {
-								Path beforeFullPath = pairPath
-										.getBeforeFullPath();
-								Path afterFullPath = pairPath
-										.getAfterFullPath();
-								newPairPathList.add(new PairPath(afterFullPath,
-										afterFullPath));
-								Files.move(beforeFullPath, afterFullPath);
-								outputConsoleTextArea.appendText("rename :\n"
-										+ pairPath.getBeforeFullPath()
-										+ "\nto :\n"
-										+ pairPath.getAfterFullPath()
-										+ "\n\n\n");
-								TimeUnit.MILLISECONDS.sleep(100);
-							} catch (Exception e) {
-								printErrorToConsoleOutput(e);
-								e.printStackTrace();
-
-							}
-						});
-						this.pairPathList.setAll(newPairPathList);
-
-						this.outputConsoleTextArea
-								.appendText("\n\n\nfinished renaming all files !\n\n\n");
-					}).start();
-		}
+	private void disableControl(boolean isDisable) {
+		this.renamingButton.setDisable(isDisable);
+		this.clearingButton.setDisable(isDisable);
+		this.removingButton.setDisable(isDisable);
+		this.operationSplitMenuButton.setDisable(isDisable);
 	}
 
 	@FXML
 	public void handleClearButton() {
 
+		disableControl(true);
 		this.outputConsoleTextArea.setStyle("-fx-text-fill: white");
-
 		this.pairPathList.clear();
 		this.outputConsoleTextArea.clear();
 		this.outputConsoleTextArea
 				.setText("table is empty, click plus button for add files to table");
+	}
+
+	@FXML
+	public void handleRenameButton() {
+		if (!this.pairPathList.isEmpty()) {
+			renameToDisk(this.pairPathList);
+		}
+	}
+
+	private void renameToDisk(ObservableList<PairPath> pairPathList) {
+		new Thread(
+				() -> {
+					List<PairPath> newPairPathList = new ArrayList<>();
+					this.outputConsoleTextArea.setStyle("-fx-text-fill: green");
+					this.outputConsoleTextArea.clear();
+					this.pairPathList.forEach(pairPath -> {
+						try {
+							Path beforeFullPath = pairPath.getBeforeFullPath();
+							Path afterFullPath = pairPath.getAfterFullPath();
+							newPairPathList.add(new PairPath(afterFullPath,
+									afterFullPath));
+							Files.move(beforeFullPath, afterFullPath);
+							outputConsoleTextArea.appendText("rename :\n"
+									+ pairPath.getBeforeFullPath() + "\nto :\n"
+									+ pairPath.getAfterFullPath() + "\n\n\n");
+							TimeUnit.MILLISECONDS.sleep(100);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+					});
+					this.pairPathList.setAll(new ArrayList<>(newPairPathList));
+					this.outputConsoleTextArea
+							.appendText("\n\n\nfinished renaming all files !\n\n\n");
+				}).start();
 	}
 
 	@FXML
@@ -210,6 +220,9 @@ public class SeeurMainWindowController implements Initializable {
 			this.outputConsoleTextArea.appendText("delete from table : "
 					+ pairPath.toString() + "\n\n");
 			this.pairPathList.remove(pairPath);
+			if (this.pairPathList.isEmpty()) {
+				disableControl(true);
+			}
 		}
 	}
 
@@ -227,13 +240,11 @@ public class SeeurMainWindowController implements Initializable {
 								.setPairPathList(this.pairPathList);
 						caseConverterController
 								.setPathsRenamer(this.pathsRenamer);
-
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
 			printErrorToConsoleOutput(e);
 			e.printStackTrace();
 		}
-
 	}
 
 	@FXML
@@ -255,7 +266,6 @@ public class SeeurMainWindowController implements Initializable {
 			printErrorToConsoleOutput(e);
 			e.printStackTrace();
 		}
-
 	}
 
 	@FXML
@@ -278,28 +288,24 @@ public class SeeurMainWindowController implements Initializable {
 			printErrorToConsoleOutput(e);
 			e.printStackTrace();
 		}
-
-	}
-
-	@FXML
-	public void handleBackButton() {
-		this.pairPathList.clear();
-		this.oldPairPathList.forEach(pairPath -> this.pairPathList
-				.add(new PairPath(pairPath.getBeforeFullPath(), pairPath
-						.getAfterFullPath())));
 	}
 
 	@FXML
 	public void handleAboutButton() {
+		try {
 
-		this.outputConsoleTextArea.setStyle("-fx-text-fill: white");
-		this.outputConsoleTextArea.clear();
-		BufferedReader bufferedReader = new BufferedReader(
-				new InputStreamReader(
-						ClassLoader
-								.getSystemResourceAsStream("seeurrenamer/main/resources/text/license.txt")));
-		bufferedReader.lines().forEach(
-				line -> this.outputConsoleTextArea.appendText(line + "\n"));
+			this.outputConsoleTextArea.setStyle("-fx-text-fill: white");
+			this.outputConsoleTextArea.clear();
+			BufferedReader bufferedReader = new BufferedReader(
+					new InputStreamReader(
+							ClassLoader
+									.getSystemResourceAsStream("seeurrenamer/main/resources/text/license.txt")));
+			this.outputConsoleTextArea.setText(bufferedReader.lines().collect(
+					Collectors.joining("\n")));
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setStage(Stage stage) {
