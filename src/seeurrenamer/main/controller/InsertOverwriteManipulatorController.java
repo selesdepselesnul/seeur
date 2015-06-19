@@ -1,12 +1,14 @@
 package seeurrenamer.main.controller;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
-import seeurrenamer.main.util.PositionalRenaming;
+import seeurrenamer.main.util.positionalrenaming.InsertionPositionalRenamer;
+import seeurrenamer.main.util.positionalrenaming.OverwritingPositionalRenamer;
+import seeurrenamer.main.util.positionalrenaming.PositionalRenaming;
+import seeurrenamer.main.util.positionalrenaming.PositionalRenamingDirection;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,10 +20,10 @@ import javafx.stage.Stage;
 
 public class InsertOverwriteManipulatorController implements Initializable {
 	@FXML
-	private ComboBox<String> operationModeComboBox;
+	private ComboBox<PositionalRenaming> positionalRenamingComboBox;
 
 	@FXML
-	private ComboBox<String> directionComboBox;
+	private ComboBox<PositionalRenamingDirection> positionalRenamingDirectionComboBox;
 
 	@FXML
 	private TextField newStringTextField;
@@ -38,16 +40,16 @@ public class InsertOverwriteManipulatorController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		this.operationModeComboBox.getItems().setAll(
-				PositionalRenaming.INSERTION_OPERATION,
-				PositionalRenaming.OVERWRITEN_OPERATION);
+		this.positionalRenamingComboBox.getItems().setAll(
+				new InsertionPositionalRenamer(),
+				new OverwritingPositionalRenamer());
 
-		this.directionComboBox.getItems().setAll(PositionalRenaming.LEFT_SIDE,
-				PositionalRenaming.RIGHT_SIDE);
+		this.positionalRenamingDirectionComboBox.getItems().setAll(PositionalRenamingDirection.LEFT,
+				PositionalRenamingDirection.RIGHT);
 
-		this.operationModeComboBox
-				.setValue(PositionalRenaming.INSERTION_OPERATION);
-		this.directionComboBox.setValue(PositionalRenaming.LEFT_SIDE);
+		this.positionalRenamingComboBox
+				.setValue(new InsertionPositionalRenamer());
+		this.positionalRenamingDirectionComboBox.setValue(PositionalRenamingDirection.LEFT);
 
 		this.indexSpinner
 				.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
@@ -57,13 +59,13 @@ public class InsertOverwriteManipulatorController implements Initializable {
 
 	@FXML
 	public void handleRenameOperation() {
-		List<PairPath> newPairPathList = this.pathsRenamer
-				.rename(this.pairPathList,
-						new PositionalRenaming(this.operationModeComboBox
-								.getValue(), this.directionComboBox.getValue(),
-								this.indexSpinner.getValue(),
-								this.newStringTextField.getText()));
-		this.pairPathList.setAll(newPairPathList);
+		PositionalRenaming positionalRenaming = this.positionalRenamingComboBox
+				.getValue();
+		positionalRenaming.setDirection(this.positionalRenamingDirectionComboBox.getValue());
+		positionalRenaming.setPosition(this.indexSpinner.getValue());
+		positionalRenaming.setNewString(this.newStringTextField.getText());
+		this.pairPathList.setAll(this.pathsRenamer.rename(this.pairPathList,
+				positionalRenaming));
 	}
 
 	@FXML

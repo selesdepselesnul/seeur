@@ -23,12 +23,12 @@
 					minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<ComboBox fx:id="operationModeComboBox" onAction="#handleRenameOperation"
+				<ComboBox fx:id="positionalRenamingComboBox" onAction="#handleRenameOperation"
 					prefWidth="150.0" />
 				<TextField fx:id="newStringTextField" onKeyReleased="#handleRenameOperation"
 					promptText="any string" GridPane.columnIndex="1"
 					GridPane.halignment="RIGHT" />
-				<ComboBox fx:id="directionComboBox" onAction="#handleRenameOperation"
+				<ComboBox fx:id="positionalRenamingDirectionComboBox" onAction="#handleRenameOperation"
 					prefWidth="150.0" GridPane.rowIndex="1" />
 				<HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0"
 					GridPane.columnIndex="1" GridPane.rowIndex="1">
