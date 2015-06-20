@@ -13,10 +13,10 @@ import org.junit.Test;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
+import seeurrenamer.main.util.RenamingDirection;
 import seeurrenamer.main.util.positionalrenaming.InsertionPositionalRenamer;
 import seeurrenamer.main.util.positionalrenaming.OverwritingPositionalRenamer;
 import seeurrenamer.main.util.positionalrenaming.PositionalRenaming;
-import seeurrenamer.main.util.positionalrenaming.PositionalRenamingDirection;
 
 public class PositionalRenamingTest {
 
@@ -34,7 +34,7 @@ public class PositionalRenamingTest {
 	@Test
 	public void testRenameWithInsertionAndLeftDirection() {
 		PositionalRenaming positionalPathRenamer = new InsertionPositionalRenamer(
-				PositionalRenamingDirection.LEFT, 4, "an");
+				RenamingDirection.LEFT, 4, "an");
 		List<PairPath> expectedSelectedPaths = Arrays.asList(
 				new PairPath(Paths.get("/xyz/jadi.jar"), Paths
 						.get("/xyz/jadian.jar")),
@@ -47,7 +47,7 @@ public class PositionalRenamingTest {
 	@Test
 	public void testRenameWithInsertionAndRightDirection() {
 		PositionalRenaming positionalPathRenamer = new InsertionPositionalRenamer(
-				PositionalRenamingDirection.RIGHT, 3, "an");
+				RenamingDirection.RIGHT, 3, "an");
 
 		List<PairPath> expectedSelectedPaths = Arrays.asList(
 				new PairPath(Paths.get("/xyz/jadi.jar"), Paths
@@ -61,7 +61,7 @@ public class PositionalRenamingTest {
 	@Test
 	public void testRenameWithLeftPositionAndOverwrite() {
 		PositionalRenaming positionalPathRenamer = new OverwritingPositionalRenamer(
-				PositionalRenamingDirection.LEFT, 4, "an");
+				RenamingDirection.LEFT, 4, "an");
 
 		List<PairPath> selectedPathList = Arrays.asList(
 				new PairPath(Paths.get("/xyz/jadi.jar"), Paths
@@ -77,7 +77,7 @@ public class PositionalRenamingTest {
 	@Test
 	public void testRenameWithRightPositionAndOverwrite() {
 		PositionalRenaming positionalPathRenamer = new OverwritingPositionalRenamer(
-				PositionalRenamingDirection.RIGHT, 4, "ole");
+				RenamingDirection.RIGHT, 4, "ole");
 
 		List<PairPath> selectedPathList = Arrays.asList(
 				new PairPath(Paths.get("/xyz/jadi.jar"), Paths

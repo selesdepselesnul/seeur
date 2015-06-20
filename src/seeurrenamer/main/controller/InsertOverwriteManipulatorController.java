@@ -5,10 +5,10 @@ import java.util.ResourceBundle;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
+import seeurrenamer.main.util.RenamingDirection;
 import seeurrenamer.main.util.positionalrenaming.InsertionPositionalRenamer;
 import seeurrenamer.main.util.positionalrenaming.OverwritingPositionalRenamer;
 import seeurrenamer.main.util.positionalrenaming.PositionalRenaming;
-import seeurrenamer.main.util.positionalrenaming.PositionalRenamingDirection;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +23,7 @@ public class InsertOverwriteManipulatorController implements Initializable {
 	private ComboBox<PositionalRenaming> positionalRenamingComboBox;
 
 	@FXML
-	private ComboBox<PositionalRenamingDirection> positionalRenamingDirectionComboBox;
+	private ComboBox<RenamingDirection> positionalRenamingDirectionComboBox;
 
 	@FXML
 	private TextField newStringTextField;
@@ -44,12 +44,12 @@ public class InsertOverwriteManipulatorController implements Initializable {
 				new InsertionPositionalRenamer(),
 				new OverwritingPositionalRenamer());
 
-		this.positionalRenamingDirectionComboBox.getItems().setAll(PositionalRenamingDirection.LEFT,
-				PositionalRenamingDirection.RIGHT);
+		this.positionalRenamingDirectionComboBox.getItems().setAll(RenamingDirection.LEFT,
+				RenamingDirection.RIGHT);
 
 		this.positionalRenamingComboBox
 				.setValue(new InsertionPositionalRenamer());
-		this.positionalRenamingDirectionComboBox.setValue(PositionalRenamingDirection.LEFT);
+		this.positionalRenamingDirectionComboBox.setValue(RenamingDirection.LEFT);
 
 		this.indexSpinner
 				.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(

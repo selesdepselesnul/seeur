@@ -25,12 +25,12 @@
 					vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<ComboBox fx:id="directionComboBox" onAction="#handleRemovingCharacter"
+				<ComboBox fx:id="renamingDirectionComboBox" onAction="#handleRemovingCharacter"
 					prefHeight="26.0" prefWidth="211.0" />
 				<HBox prefHeight="53.0" prefWidth="218.0" spacing="6.0"
 					GridPane.columnIndex="1">
 					<children>
-						<Label text="from">
+						<Label text="start at">
 							<HBox.margin>
 								<Insets top="18.0" />
 							</HBox.margin>

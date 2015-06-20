@@ -4,13 +4,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Function;
 
+import seeurrenamer.main.util.RenamingDirection;
+
 public class InsertionPositionalRenamer extends PositionalRenaming {
 
 	public InsertionPositionalRenamer() {
 
 	}
 
-	public InsertionPositionalRenamer(PositionalRenamingDirection direction, int position,
+	public InsertionPositionalRenamer(RenamingDirection direction, int position,
 			String newString) {
 		super(direction, position, newString);
 	}

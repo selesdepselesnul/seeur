@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Function;
 
 import seeurrenamer.main.util.PathsRenamer;
+import seeurrenamer.main.util.RenamingDirection;
 
 /**
  * PositionalRenaming is a concrete class that implements {@link Function}, it
@@ -16,7 +17,7 @@ import seeurrenamer.main.util.PathsRenamer;
  */
 public abstract class PositionalRenaming implements Function<Path, Path> {
 
-	private PositionalRenamingDirection direction;
+	private RenamingDirection direction;
 	private String newString;
 	private String pathString;
 	private int position;
@@ -34,7 +35,7 @@ public abstract class PositionalRenaming implements Function<Path, Path> {
 	 * @param newString
 	 *            newString to either inserting or overwriting
 	 */
-	public PositionalRenaming(PositionalRenamingDirection direction,
+	public PositionalRenaming(RenamingDirection direction,
 			int position, String newString) {
 		this.direction = direction;
 		this.position = position;
@@ -42,7 +43,7 @@ public abstract class PositionalRenaming implements Function<Path, Path> {
 	}
 
 	public PositionalRenaming() {
-		this.direction = PositionalRenamingDirection.LEFT;
+		this.direction = RenamingDirection.LEFT;
 		this.position = 0;
 		this.newString = "";
 	}
@@ -50,9 +51,9 @@ public abstract class PositionalRenaming implements Function<Path, Path> {
 	@Override
 	final public Path apply(Path path) {
 		this.pathString = path.toString();
-		if (this.direction.equals(PositionalRenamingDirection.LEFT)) {
+		if (this.direction.equals(RenamingDirection.LEFT)) {
 			return renameLeft();
-		} else if (this.direction.equals(PositionalRenamingDirection.RIGHT)) {
+		} else if (this.direction.equals(RenamingDirection.RIGHT)) {
 			return renameRight();
 		} else {
 			throw new IllegalArgumentException();
@@ -63,11 +64,11 @@ public abstract class PositionalRenaming implements Function<Path, Path> {
 
 	public abstract Path renameLeft();
 
-	public PositionalRenamingDirection getDirection() {
+	public RenamingDirection getDirection() {
 		return direction;
 	}
 
-	public void setDirection(PositionalRenamingDirection direction) {
+	public void setDirection(RenamingDirection direction) {
 		this.direction = direction;
 	}
 
