@@ -89,13 +89,4 @@ public class PositionalRenamerTest {
 				is(equalTo(selectedPathList)));
 
 	}
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testRenameWithNotValidMode() {
-	// PositionalRenamer positionalPathRenamer = new PositionalRenamer(
-	// "not valid mode", PositionalRenamer.RIGHT_SIDE, 4, "ole");
-	//
-	// this.pathRenamer.rename(pathList, positionalPathRenamer);
-	//
-	// }
 }

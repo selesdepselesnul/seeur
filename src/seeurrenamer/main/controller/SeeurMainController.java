@@ -101,12 +101,12 @@ public class SeeurMainController implements Initializable {
 					"seeurrenamer/main/view/manipulator/InsertingOrOverwritingManipulator.fxml",
 					"insert / overwrite",
 					(fxmlLoader, stage) -> {
-						InsertingOrOverwritingManipulatorController insertOverwriteManipulatorController = (InsertingOrOverwritingManipulatorController) fxmlLoader
+						InsertingOrOverwritingManipulatorController insAndOvwManipulatorController = (InsertingOrOverwritingManipulatorController) fxmlLoader
 								.getController();
-						insertOverwriteManipulatorController
+						insAndOvwManipulatorController
 								.setPairPathList(this.pairPathList);
-						insertOverwriteManipulatorController.setStage(stage);
-						insertOverwriteManipulatorController
+						insAndOvwManipulatorController.setStage(stage);
+						insAndOvwManipulatorController
 								.setPathsRenamer(this.pathsRenamer);
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
@@ -124,8 +124,7 @@ public class SeeurMainController implements Initializable {
 
 	private void printErrorToConsoleOutput(Exception e) {
 		this.outputConsoleTextArea.setStyle("-fx-text-fill: red");
-		this.outputConsoleTextArea.setText("ouch... something going wrong !"
-				+ "\n\n you rename files that don't exist :(");
+		this.outputConsoleTextArea.setText("ouch... something going wrong !");
 	}
 
 	@FXML
@@ -243,11 +242,11 @@ public class SeeurMainController implements Initializable {
 					"seeurrenamer/main/view/manipulator/CaseManipulator.fxml",
 					"convert case",
 					(fxmlLoader, stage) -> {
-						CaseManipulatorController caseConverterController = (CaseManipulatorController) fxmlLoader
+						CaseManipulatorController caseManipulatorController = (CaseManipulatorController) fxmlLoader
 								.getController();
-						caseConverterController
+						caseManipulatorController
 								.setPairPathList(this.pairPathList);
-						caseConverterController
+						caseManipulatorController
 								.setPathsRenamer(this.pathsRenamer);
 					}).show(WindowLoader.SHOW_AND_WAITING);
 		} catch (IOException e) {
@@ -285,11 +284,11 @@ public class SeeurMainController implements Initializable {
 					"seeurrenamer/main/view/manipulator/RemoverManipulator.fxml",
 					"remove character",
 					(fxmlLoader, stage) -> {
-						RemoverManipulatorController removingCharManipulatorController = (RemoverManipulatorController) fxmlLoader
+						RemoverManipulatorController removerManipulatorController = (RemoverManipulatorController) fxmlLoader
 								.getController();
-						removingCharManipulatorController
+						removerManipulatorController
 								.setPairPathList(this.pairPathList);
-						removingCharManipulatorController
+						removerManipulatorController
 								.setPathsRenamer(this.pathsRenamer);
 
 					}).show(WindowLoader.SHOW_AND_WAITING);

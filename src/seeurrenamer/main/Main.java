@@ -20,9 +20,9 @@ public class Main extends Application {
 					"seeurrenamer/main/resources/style/seeur_renamer_main_window.css",
 					"SEEUR ~1.0.0~",
 					(fxmlLoader, stage) -> {
-						SeeurMainController seeurMainWindowController = (SeeurMainController) fxmlLoader
+						SeeurMainController seeurMainController = (SeeurMainController) fxmlLoader
 								.getController();
-						seeurMainWindowController.setStage(primaryStage);
+						seeurMainController.setStage(primaryStage);
 					});
 			windowLoader.setResizable(true);
 			windowLoader.show(WindowLoader.SHOW_ONLY);

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane collapsible="false" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="100.0" prefWidth="400.0" text="manipulator"
+	xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="seeurrenamer.main.controller.manipulator.SequenceManipulatorController">
+	<content>
+		<GridPane prefHeight="47.0" prefWidth="404.0">
+			<children>
+				<Label text="Convert to" />
+				<ComboBox fx:id="sequenceComboBox" onAction="#handleNumberingFormatComboBox"
+					prefHeight="25.0" prefWidth="241.0" promptText="sequence format"
+					GridPane.columnIndex="1" />
+			</children>
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="181.0"
+					minWidth="10.0" prefWidth="117.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0"
+					minWidth="10.0" prefWidth="267.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+			</rowConstraints>
+		</GridPane>
+	</content>
+</TitledPane>
