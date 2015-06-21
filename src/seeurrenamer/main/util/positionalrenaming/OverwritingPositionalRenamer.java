@@ -4,14 +4,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Function;
 
-import seeurrenamer.main.util.RenamingDirection;
+import seeurrenamer.main.util.RenamerDirection;
 
-public class OverwritingPositionalRenamer extends PositionalRenaming {
+
+/**
+ * @author moch deden
+ *
+ */
+public class OverwritingPositionalRenamer extends PositionalRenamer {
 
 	public OverwritingPositionalRenamer() {
 	}
 
-	public OverwritingPositionalRenamer(RenamingDirection direction, int position,
+	public OverwritingPositionalRenamer(RenamerDirection direction, int position,
 			String newString) {
 		super(direction, position, newString);
 	}

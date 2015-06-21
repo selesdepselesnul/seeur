@@ -1,6 +1,6 @@
 package seeurrenamer.main.util;
 
-public enum RenamingDirection {
+public enum RenamerDirection {
 	LEFT, RIGHT;
 
 	@Override

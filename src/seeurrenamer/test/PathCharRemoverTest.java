@@ -12,13 +12,13 @@ import org.junit.Test;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
-import seeurrenamer.main.util.RemoverRenaming;
-import seeurrenamer.main.util.RenamingDirection;
+import seeurrenamer.main.util.RemoverRenamer;
+import seeurrenamer.main.util.RenamerDirection;
 
 public class PathCharRemoverTest {
 
 	private static PathsRenamer pathRenamer;
-	private RemoverRenaming pathCharRemover;
+	private RemoverRenamer pathCharRemover;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -27,7 +27,7 @@ public class PathCharRemoverTest {
 
 	@Test
 	public void testRemoveFromLeft() {
-		pathCharRemover = new RemoverRenaming(RenamingDirection.LEFT, 0, 4);
+		pathCharRemover = new RemoverRenamer(RenamerDirection.LEFT, 0, 4);
 		List<PairPath> pairPathList = Arrays.asList(new PairPath(Paths
 				.get("/test/aku adalah")));
 		pathRenamer.rename(pairPathList, pathCharRemover);
@@ -38,7 +38,7 @@ public class PathCharRemoverTest {
 
 	@Test
 	public void testRemoveFromRight() {
-		pathCharRemover = new RemoverRenaming(RenamingDirection.RIGHT, 0, 7);
+		pathCharRemover = new RemoverRenamer(RenamerDirection.RIGHT, 0, 7);
 		List<PairPath> pairPathList = Arrays.asList(new PairPath(Paths
 				.get("/test/aku adalah")));
 		pathRenamer.rename(pairPathList, pathCharRemover);

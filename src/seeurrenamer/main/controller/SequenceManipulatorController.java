@@ -8,8 +8,8 @@ import java.util.function.Function;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
-import seeurrenamer.main.util.sequence.AlphabetSequenceRenaming;
-import seeurrenamer.main.util.sequence.DecimalSequenceRenaming;
+import seeurrenamer.main.util.sequence.AlphabetSequenceRenamer;
+import seeurrenamer.main.util.sequence.DecimalSequenceRenamer;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,8 +25,8 @@ public class SequenceManipulatorController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.sequenceComboBox.getItems().addAll(
-				Arrays.asList(new DecimalSequenceRenaming(),
-						new AlphabetSequenceRenaming()));
+				Arrays.asList(new DecimalSequenceRenamer(),
+						new AlphabetSequenceRenamer()));
 	}
 
 	@FXML

@@ -1,5 +1,4 @@
 Summary of regular-expression constructs
-
  
 Characters
 x	The character x
@@ -54,12 +53,6 @@ POSIX character classes (US-ASCII only)
 \p{Cntrl}	A control character: [\x00-\x1F\x7F]
 \p{XDigit}	A hexadecimal digit: [0-9a-fA-F]
 \p{Space}	A whitespace character: [ \t\n\x0B\f\r]
- 
-java.lang.Character classes (simple java character type)
-\p{javaLowerCase}	Equivalent to java.lang.Character.isLowerCase()
-\p{javaUpperCase}	Equivalent to java.lang.Character.isUpperCase()
-\p{javaWhitespace}	Equivalent to java.lang.Character.isWhitespace()
-\p{javaMirrored}	Equivalent to java.lang.Character.isMirrored()
  
 Classes for Unicode scripts, blocks, categories and binary properties
 \p{IsLatin}	A Latin script character (script)

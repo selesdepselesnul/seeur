@@ -3,7 +3,15 @@ package seeurrenamer.main.model;
 import java.nio.file.Path;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.control.TableView;
 
+/**
+ * It is a model class that represents path before and after renamed, this class
+ * also can be used as a model for javafx {@link TableView}
+ * 
+ * @author moch deden
+ *
+ */
 public class PairPath {
 
 	private SimpleObjectProperty<Path> before;

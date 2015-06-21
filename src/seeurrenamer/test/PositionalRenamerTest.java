@@ -13,12 +13,12 @@ import org.junit.Test;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
-import seeurrenamer.main.util.RenamingDirection;
+import seeurrenamer.main.util.RenamerDirection;
 import seeurrenamer.main.util.positionalrenaming.InsertionPositionalRenamer;
 import seeurrenamer.main.util.positionalrenaming.OverwritingPositionalRenamer;
-import seeurrenamer.main.util.positionalrenaming.PositionalRenaming;
+import seeurrenamer.main.util.positionalrenaming.PositionalRenamer;
 
-public class PositionalRenamingTest {
+public class PositionalRenamerTest {
 
 	private PathsRenamer pathRenamer;
 	private List<PairPath> pathList;
@@ -33,8 +33,8 @@ public class PositionalRenamingTest {
 
 	@Test
 	public void testRenameWithInsertionAndLeftDirection() {
-		PositionalRenaming positionalPathRenamer = new InsertionPositionalRenamer(
-				RenamingDirection.LEFT, 4, "an");
+		PositionalRenamer positionalPathRenamer = new InsertionPositionalRenamer(
+				RenamerDirection.LEFT, 4, "an");
 		List<PairPath> expectedSelectedPaths = Arrays.asList(
 				new PairPath(Paths.get("/xyz/jadi.jar"), Paths
 						.get("/xyz/jadian.jar")),
@@ -46,8 +46,8 @@ public class PositionalRenamingTest {
 
 	@Test
 	public void testRenameWithInsertionAndRightDirection() {
-		PositionalRenaming positionalPathRenamer = new InsertionPositionalRenamer(
-				RenamingDirection.RIGHT, 3, "an");
+		PositionalRenamer positionalPathRenamer = new InsertionPositionalRenamer(
+				RenamerDirection.RIGHT, 3, "an");
 
 		List<PairPath> expectedSelectedPaths = Arrays.asList(
 				new PairPath(Paths.get("/xyz/jadi.jar"), Paths
@@ -60,8 +60,8 @@ public class PositionalRenamingTest {
 
 	@Test
 	public void testRenameWithLeftPositionAndOverwrite() {
-		PositionalRenaming positionalPathRenamer = new OverwritingPositionalRenamer(
-				RenamingDirection.LEFT, 4, "an");
+		PositionalRenamer positionalPathRenamer = new OverwritingPositionalRenamer(
+				RenamerDirection.LEFT, 4, "an");
 
 		List<PairPath> selectedPathList = Arrays.asList(
 				new PairPath(Paths.get("/xyz/jadi.jar"), Paths
@@ -76,8 +76,8 @@ public class PositionalRenamingTest {
 
 	@Test
 	public void testRenameWithRightPositionAndOverwrite() {
-		PositionalRenaming positionalPathRenamer = new OverwritingPositionalRenamer(
-				RenamingDirection.RIGHT, 4, "ole");
+		PositionalRenamer positionalPathRenamer = new OverwritingPositionalRenamer(
+				RenamerDirection.RIGHT, 4, "ole");
 
 		List<PairPath> selectedPathList = Arrays.asList(
 				new PairPath(Paths.get("/xyz/jadi.jar"), Paths
@@ -92,8 +92,8 @@ public class PositionalRenamingTest {
 	//
 	// @Test(expected = IllegalArgumentException.class)
 	// public void testRenameWithNotValidMode() {
-	// PositionalRenaming positionalPathRenamer = new PositionalRenaming(
-	// "not valid mode", PositionalRenaming.RIGHT_SIDE, 4, "ole");
+	// PositionalRenamer positionalPathRenamer = new PositionalRenamer(
+	// "not valid mode", PositionalRenamer.RIGHT_SIDE, 4, "ole");
 	//
 	// this.pathRenamer.rename(pathList, positionalPathRenamer);
 	//

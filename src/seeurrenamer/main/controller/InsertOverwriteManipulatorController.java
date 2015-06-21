@@ -5,10 +5,10 @@ import java.util.ResourceBundle;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
-import seeurrenamer.main.util.RenamingDirection;
+import seeurrenamer.main.util.RenamerDirection;
 import seeurrenamer.main.util.positionalrenaming.InsertionPositionalRenamer;
 import seeurrenamer.main.util.positionalrenaming.OverwritingPositionalRenamer;
-import seeurrenamer.main.util.positionalrenaming.PositionalRenaming;
+import seeurrenamer.main.util.positionalrenaming.PositionalRenamer;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,10 +20,10 @@ import javafx.stage.Stage;
 
 public class InsertOverwriteManipulatorController implements Initializable {
 	@FXML
-	private ComboBox<PositionalRenaming> positionalRenamingComboBox;
+	private ComboBox<PositionalRenamer> positionalRenamingComboBox;
 
 	@FXML
-	private ComboBox<RenamingDirection> positionalRenamingDirectionComboBox;
+	private ComboBox<RenamerDirection> positionalRenamingDirectionComboBox;
 
 	@FXML
 	private TextField newStringTextField;
@@ -44,12 +44,12 @@ public class InsertOverwriteManipulatorController implements Initializable {
 				new InsertionPositionalRenamer(),
 				new OverwritingPositionalRenamer());
 
-		this.positionalRenamingDirectionComboBox.getItems().setAll(RenamingDirection.LEFT,
-				RenamingDirection.RIGHT);
+		this.positionalRenamingDirectionComboBox.getItems().setAll(RenamerDirection.LEFT,
+				RenamerDirection.RIGHT);
 
 		this.positionalRenamingComboBox
 				.setValue(new InsertionPositionalRenamer());
-		this.positionalRenamingDirectionComboBox.setValue(RenamingDirection.LEFT);
+		this.positionalRenamingDirectionComboBox.setValue(RenamerDirection.LEFT);
 
 		this.indexSpinner
 				.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
@@ -59,7 +59,7 @@ public class InsertOverwriteManipulatorController implements Initializable {
 
 	@FXML
 	public void handleRenameOperation() {
-		PositionalRenaming positionalRenaming = this.positionalRenamingComboBox
+		PositionalRenamer positionalRenaming = this.positionalRenamingComboBox
 				.getValue();
 		positionalRenaming.setDirection(this.positionalRenamingDirectionComboBox.getValue());
 		positionalRenaming.setPosition(this.indexSpinner.getValue());

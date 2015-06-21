@@ -4,7 +4,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Function;
 
-public class DecimalSequenceRenaming implements Function<Path, Path> {
+/**
+ * @author moch deden
+ *
+ */
+public class DecimalSequenceRenamer implements Function<Path, Path> {
 
 	int startValue = 0;
 

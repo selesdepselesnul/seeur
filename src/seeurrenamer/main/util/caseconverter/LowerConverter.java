@@ -5,6 +5,10 @@ import java.nio.file.Paths;
 import java.util.function.Function;
 
 
+/**
+ * @author moch deden
+ *
+ */
 public class LowerConverter implements Function<Path, Path> {
 
 	@Override

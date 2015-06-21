@@ -4,10 +4,10 @@ import java.nio.file.Path;
 import java.util.function.Function;
 
 import seeurrenamer.main.util.PathsRenamer;
-import seeurrenamer.main.util.RenamingDirection;
+import seeurrenamer.main.util.RenamerDirection;
 
 /**
- * PositionalRenaming is a concrete class that implements {@link Function}, it
+ * PositionalRenamer is a concrete class that implements {@link Function}, it
  * can be used for renaming individual path or it can be used as an argument to
  * parameter renamingMethod of method
  * {@link PathsRenamer#rename(java.util.List, Function)}
@@ -15,15 +15,15 @@ import seeurrenamer.main.util.RenamingDirection;
  * @author moch deden
  *
  */
-public abstract class PositionalRenaming implements Function<Path, Path> {
+public abstract class PositionalRenamer implements Function<Path, Path> {
 
-	private RenamingDirection direction;
+	private RenamerDirection direction;
 	private String newString;
 	private String pathString;
 	private int position;
 
 	/**
-	 * Initializes object of class {@link PositionalRenaming} with specified
+	 * Initializes object of class {@link PositionalRenamer} with specified
 	 * operation, direction, position dan the newString to insert or to
 	 * overwrite
 	 * 
@@ -35,15 +35,15 @@ public abstract class PositionalRenaming implements Function<Path, Path> {
 	 * @param newString
 	 *            newString to either inserting or overwriting
 	 */
-	public PositionalRenaming(RenamingDirection direction,
+	public PositionalRenamer(RenamerDirection direction,
 			int position, String newString) {
 		this.direction = direction;
 		this.position = position;
 		this.newString = newString;
 	}
 
-	public PositionalRenaming() {
-		this.direction = RenamingDirection.LEFT;
+	public PositionalRenamer() {
+		this.direction = RenamerDirection.LEFT;
 		this.position = 0;
 		this.newString = "";
 	}
@@ -51,24 +51,24 @@ public abstract class PositionalRenaming implements Function<Path, Path> {
 	@Override
 	final public Path apply(Path path) {
 		this.pathString = path.toString();
-		if (this.direction.equals(RenamingDirection.LEFT)) {
+		if (this.direction.equals(RenamerDirection.LEFT)) {
 			return renameLeft();
-		} else if (this.direction.equals(RenamingDirection.RIGHT)) {
+		} else if (this.direction.equals(RenamerDirection.RIGHT)) {
 			return renameRight();
 		} else {
 			throw new IllegalArgumentException();
 		}
 	}
 
-	public abstract Path renameRight();
+	protected abstract Path renameRight();
 
-	public abstract Path renameLeft();
+	protected abstract Path renameLeft();
 
-	public RenamingDirection getDirection() {
+	public RenamerDirection getDirection() {
 		return direction;
 	}
 
-	public void setDirection(RenamingDirection direction) {
+	public void setDirection(RenamerDirection direction) {
 		this.direction = direction;
 	}
 

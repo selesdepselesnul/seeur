@@ -12,8 +12,8 @@ import org.junit.Test;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
-import seeurrenamer.main.util.sequence.AlphabetSequenceRenaming;
-import seeurrenamer.main.util.sequence.DecimalSequenceRenaming;
+import seeurrenamer.main.util.sequence.AlphabetSequenceRenamer;
+import seeurrenamer.main.util.sequence.DecimalSequenceRenamer;
 
 public class SequenceAdderTest {
 
@@ -30,7 +30,7 @@ public class SequenceAdderTest {
 
 	@Test
 	public void testAddWithDecimalSequence() {
-		DecimalSequenceRenaming decimalSequence = new DecimalSequenceRenaming();
+		DecimalSequenceRenamer decimalSequence = new DecimalSequenceRenamer();
 		assertThat(pathRenamer.rename(pairPathList, decimalSequence),
 				is(equalTo(Arrays.asList(
 						new PairPath(Paths.get("/test/sudono"), Paths
@@ -43,7 +43,7 @@ public class SequenceAdderTest {
 
 	@Test
 	public void testAddWithAlphabetSequence() {
-		AlphabetSequenceRenaming alphabetSequence = new AlphabetSequenceRenaming();
+		AlphabetSequenceRenamer alphabetSequence = new AlphabetSequenceRenamer();
 		assertThat(pathRenamer.rename(pairPathList, alphabetSequence),
 				is(equalTo(Arrays.asList(
 						new PairPath(Paths.get("/test/sudono"), Paths

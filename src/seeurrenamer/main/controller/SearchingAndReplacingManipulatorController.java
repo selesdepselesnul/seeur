@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
-import seeurrenamer.main.util.RegexRenaming;
+import seeurrenamer.main.util.RegexRenamer;
 import seeurrenamer.main.util.WindowLoader;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,12 +28,12 @@ public class SearchingAndReplacingManipulatorController {
 
 	@FXML
 	public void handleOnWriteString() {
-		RegexRenaming regexRenaming = new RegexRenaming(
+		RegexRenamer regexRenaming = new RegexRenamer(
 				this.regexTextField.getText(),
 				this.replacerTextField.getText(),
 				this.isCaseInsensitiveCheckBox.isSelected());
-		this.pairPathList.setAll(this.pathsRenamer.rename(
-				this.pairPathList, regexRenaming));
+		this.pairPathList.setAll(this.pathsRenamer.rename(this.pairPathList,
+				regexRenaming));
 
 	}
 
@@ -44,8 +44,11 @@ public class SearchingAndReplacingManipulatorController {
 	@FXML
 	public void handleHelpRegex() {
 		try {
-			new WindowLoader("seeurrenamer/main/view/RegexSummaryWindow.fxml",
-					"Regex Summary", null).show(WindowLoader.SHOW_AND_WAITING);
+			WindowLoader windowLoader = new WindowLoader(
+					"seeurrenamer/main/view/RegexSummaryWindow.fxml",
+					"Regex Summary", null);
+			windowLoader.setResizable(true);
+			windowLoader.show(WindowLoader.SHOW_ONLY);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

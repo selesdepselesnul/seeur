@@ -5,8 +5,8 @@ import java.util.ResourceBundle;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
-import seeurrenamer.main.util.RemoverRenaming;
-import seeurrenamer.main.util.RenamingDirection;
+import seeurrenamer.main.util.RemoverRenamer;
+import seeurrenamer.main.util.RenamerDirection;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +17,7 @@ import javafx.scene.control.SpinnerValueFactory;
 public class RemovingCharManipulatorController implements Initializable {
 
 	@FXML
-	private ComboBox<RenamingDirection> renamingDirectionComboBox;
+	private ComboBox<RenamerDirection> renamingDirectionComboBox;
 
 	@FXML
 	private Spinner<Integer> fromSpinner;
@@ -32,8 +32,8 @@ public class RemovingCharManipulatorController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.renamingDirectionComboBox.getItems().setAll(
-				RenamingDirection.LEFT, RenamingDirection.RIGHT);
-		this.renamingDirectionComboBox.setValue(RenamingDirection.LEFT);
+				RenamerDirection.LEFT, RenamerDirection.RIGHT);
+		this.renamingDirectionComboBox.setValue(RenamerDirection.LEFT);
 
 		this.fromSpinner
 				.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
@@ -49,7 +49,7 @@ public class RemovingCharManipulatorController implements Initializable {
 
 	@FXML
 	public void handleRemovingCharacter() {
-		RemoverRenaming removeRenaming = new RemoverRenaming(
+		RemoverRenamer removeRenaming = new RemoverRenamer(
 				this.renamingDirectionComboBox.getValue(),
 				this.fromSpinner.getValue(), this.toSpinner.getValue());
 		this.pairPathList.setAll(this.pathsRenamer.rename(this.pairPathList,

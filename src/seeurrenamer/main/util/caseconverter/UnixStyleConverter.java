@@ -4,6 +4,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Function;
 
+/**
+ * @author moch deden
+ *
+ */
 public class UnixStyleConverter implements Function<Path, Path> {
 
 	private static final String U_SCORE_AT_THE_END = "_+$";

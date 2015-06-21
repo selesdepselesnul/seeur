@@ -4,7 +4,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Function;
 
-public class AlphabetSequenceRenaming implements Function<Path, Path> {
+/**
+ * @author moch deden
+ *
+ */
+public class AlphabetSequenceRenamer implements Function<Path, Path> {
 
 	char currentValue = 'a' - 1;
 
