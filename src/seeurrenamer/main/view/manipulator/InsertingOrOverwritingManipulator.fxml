@@ -7,7 +7,7 @@
 
 <TitledPane collapsible="false" text="manipulator"
 	xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="seeurrenamer.main.controller.InsertOverwriteManipulatorController">
+	fx:controller="seeurrenamer.main.controller.manipulator.InsertingOrOverwritingManipulatorController">
 	<content>
 		<GridPane>
 			<columnConstraints>
@@ -28,8 +28,9 @@
 				<TextField fx:id="newStringTextField" onKeyReleased="#handleRenameOperation"
 					promptText="any string" GridPane.columnIndex="1"
 					GridPane.halignment="RIGHT" />
-				<ComboBox fx:id="positionalRenamingDirectionComboBox" onAction="#handleRenameOperation"
-					prefWidth="150.0" GridPane.rowIndex="1" />
+				<ComboBox fx:id="positionalRenamingDirectionComboBox"
+					onAction="#handleRenameOperation" prefWidth="150.0"
+					GridPane.rowIndex="1" />
 				<HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0"
 					GridPane.columnIndex="1" GridPane.rowIndex="1">
 					<children>

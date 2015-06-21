@@ -10,15 +10,15 @@ import java.util.function.Function;
  */
 public class AlphabetSequenceRenamer implements Function<Path, Path> {
 
-	char currentValue = 'a' - 1;
+	private char currentValue = 'a' - 1;
 
 	@Override
 	public Path apply(Path path) {
-		currentValue++;
-		if (currentValue > 'z') {
-			currentValue = 'a';
+		this.currentValue++;
+		if (this.currentValue >= 'z' + 1) { // reset to 'a'
+			this.currentValue = 'a';
 		}
-		return Paths.get(currentValue + "." + path);
+		return Paths.get(this.currentValue + "." + path);
 	}
 
 	@Override

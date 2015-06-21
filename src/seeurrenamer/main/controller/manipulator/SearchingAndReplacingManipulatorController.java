@@ -1,4 +1,4 @@
-package seeurrenamer.main.controller;
+package seeurrenamer.main.controller.manipulator;
 
 import java.io.IOException;
 
@@ -49,7 +49,7 @@ public class SearchingAndReplacingManipulatorController {
 	public void handleHelpRegex() {
 		try {
 			WindowLoader windowLoader = new WindowLoader(
-					"seeurrenamer/main/view/RegexSummaryWindow.fxml",
+					"seeurrenamer/main/view/RegexSummary.fxml",
 					"Regex Summary", null);
 			windowLoader.setResizable(true);
 			windowLoader.show(WindowLoader.SHOW_ONLY);

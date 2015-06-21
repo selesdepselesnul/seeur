@@ -8,7 +8,7 @@
 
 <TitledPane collapsible="false" text="manipulator"
 	xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="seeurrenamer.main.controller.SearchingAndReplacingManipulatorController">
+	fx:controller="seeurrenamer.main.controller.manipulator.SearchingAndReplacingManipulatorController">
 	<content>
 		<GridPane>
 			<columnConstraints>

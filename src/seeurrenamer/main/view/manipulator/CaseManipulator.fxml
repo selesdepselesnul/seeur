@@ -9,7 +9,7 @@
 	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
 	prefHeight="100.0" prefWidth="400.0" text="manipulator"
 	xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="seeurrenamer.main.controller.CaseConverterController">
+	fx:controller="seeurrenamer.main.controller.manipulator.CaseManipulatorController">
 	<content>
 		<GridPane prefHeight="47.0" prefWidth="404.0">
 			<columnConstraints>

@@ -10,12 +10,12 @@ import java.util.function.Function;
  */
 public class DecimalSequenceRenamer implements Function<Path, Path> {
 
-	int startValue = 0;
+	private int startValue = 0;
 
 	@Override
 	public Path apply(Path path) {
-		startValue++;
-		return Paths.get(startValue + "." + path);
+		this.startValue++;
+		return Paths.get(this.startValue + "." + path);
 	}
 
 	@Override

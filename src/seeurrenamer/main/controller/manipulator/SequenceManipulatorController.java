@@ -1,4 +1,4 @@
-package seeurrenamer.main.controller;
+package seeurrenamer.main.controller.manipulator;
 
 import java.net.URL;
 import java.nio.file.Path;

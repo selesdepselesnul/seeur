@@ -1,4 +1,4 @@
-package seeurrenamer.main.controller;
+package seeurrenamer.main.controller.manipulator;
 
 import java.net.URL;
 import java.nio.file.Path;
@@ -19,7 +19,7 @@ import seeurrenamer.main.util.caseconverter.UpperConverter;
 /**
  * @author moch deden
  */
-public class CaseConverterController implements Initializable {
+public class CaseManipulatorController implements Initializable {
 
 	@FXML
 	private ComboBox<Function<Path, Path>> caseComboBox;

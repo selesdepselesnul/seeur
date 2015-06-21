@@ -1,4 +1,4 @@
-package seeurrenamer.main.controller;
+package seeurrenamer.main.controller.manipulator;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +18,7 @@ import javafx.scene.control.SpinnerValueFactory;
  * @author moch deden 
  *
  */
-public class RemovingCharManipulatorController implements Initializable {
+public class RemoverManipulatorController implements Initializable {
 
 	@FXML
 	private ComboBox<RenamerDirection> renamingDirectionComboBox;

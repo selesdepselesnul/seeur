@@ -1,4 +1,4 @@
-package seeurrenamer.main.controller;
+package seeurrenamer.main.controller.manipulator;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  * @author moch deden
  *
  */
-public class InsertOverwriteManipulatorController implements Initializable {
+public class InsertingOrOverwritingManipulatorController implements Initializable {
 	@FXML
 	private ComboBox<PositionalRenamer> positionalRenamingComboBox;
 

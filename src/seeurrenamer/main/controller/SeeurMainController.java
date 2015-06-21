@@ -13,6 +13,11 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import seeurrenamer.main.controller.manipulator.CaseManipulatorController;
+import seeurrenamer.main.controller.manipulator.InsertingOrOverwritingManipulatorController;
+import seeurrenamer.main.controller.manipulator.RemoverManipulatorController;
+import seeurrenamer.main.controller.manipulator.SearchingAndReplacingManipulatorController;
+import seeurrenamer.main.controller.manipulator.SequenceManipulatorController;
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
 import seeurrenamer.main.util.WindowLoader;
@@ -34,7 +39,7 @@ import javafx.stage.Stage;
  * @author moch deden
  *
  */
-public class SeeurMainWindowController implements Initializable {
+public class SeeurMainController implements Initializable {
 
 	@FXML
 	private TableView<PairPath> pairPathTableView;
@@ -93,10 +98,10 @@ public class SeeurMainWindowController implements Initializable {
 		try {
 			checkIfTableIsNotEmpty();
 			new WindowLoader(
-					"seeurrenamer/main/view/InsertOrWriteManipulator.fxml",
+					"seeurrenamer/main/view/manipulator/InsertingOrOverwritingManipulator.fxml",
 					"insert / overwrite",
 					(fxmlLoader, stage) -> {
-						InsertOverwriteManipulatorController insertOverwriteManipulatorController = (InsertOverwriteManipulatorController) fxmlLoader
+						InsertingOrOverwritingManipulatorController insertOverwriteManipulatorController = (InsertingOrOverwritingManipulatorController) fxmlLoader
 								.getController();
 						insertOverwriteManipulatorController
 								.setPairPathList(this.pairPathList);
@@ -128,7 +133,7 @@ public class SeeurMainWindowController implements Initializable {
 		try {
 			checkIfTableIsNotEmpty();
 			new WindowLoader(
-					"seeurrenamer/main/view/SearchAndReplaceManipulator.fxml",
+					"seeurrenamer/main/view/manipulator/SearchingAndReplacingManipulator.fxml",
 					"seeurrenamer/main/resources/style/searching_and_replacing_window.css",
 					"search and replace",
 					(fxmlLoader, stage) -> {
@@ -235,10 +240,10 @@ public class SeeurMainWindowController implements Initializable {
 		try {
 			checkIfTableIsNotEmpty();
 			new WindowLoader(
-					"seeurrenamer/main/view/CaseManipulator.fxml",
+					"seeurrenamer/main/view/manipulator/CaseManipulator.fxml",
 					"convert case",
 					(fxmlLoader, stage) -> {
-						CaseConverterController caseConverterController = (CaseConverterController) fxmlLoader
+						CaseManipulatorController caseConverterController = (CaseManipulatorController) fxmlLoader
 								.getController();
 						caseConverterController
 								.setPairPathList(this.pairPathList);
@@ -256,7 +261,7 @@ public class SeeurMainWindowController implements Initializable {
 		try {
 			checkIfTableIsNotEmpty();
 			new WindowLoader(
-					"seeurrenamer/main/view/SequenceManipulator.fxml",
+					"seeurrenamer/main/view/manipulator/SequenceManipulator.fxml",
 					"give sequence",
 					(fxmlLoader, stage) -> {
 						SequenceManipulatorController sequenceManipulatorController = (SequenceManipulatorController) fxmlLoader
@@ -277,10 +282,10 @@ public class SeeurMainWindowController implements Initializable {
 		try {
 			checkIfTableIsNotEmpty();
 			new WindowLoader(
-					"seeurrenamer/main/view/RemovingCharManipulator.fxml",
+					"seeurrenamer/main/view/manipulator/RemoverManipulator.fxml",
 					"remove character",
 					(fxmlLoader, stage) -> {
-						RemovingCharManipulatorController removingCharManipulatorController = (RemovingCharManipulatorController) fxmlLoader
+						RemoverManipulatorController removingCharManipulatorController = (RemoverManipulatorController) fxmlLoader
 								.getController();
 						removingCharManipulatorController
 								.setPairPathList(this.pairPathList);

@@ -15,7 +15,7 @@ import javafx.scene.control.TextArea;
  * @author moch deden
  *
  */
-public class RegexSummaryWindowController implements Initializable {
+public class RegexSummaryController implements Initializable {
 
 	@FXML
 	private TextArea regexSummaryTextArea;
