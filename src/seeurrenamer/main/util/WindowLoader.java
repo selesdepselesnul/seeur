@@ -10,6 +10,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * @author moch deden
+ *
+ */
 public class WindowLoader {
 	public static final int SHOW_AND_WAITING = 0;
 	public static final int SHOW_ONLY = 1;

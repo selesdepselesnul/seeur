@@ -14,6 +14,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 
+/**
+ * @author moch deden 
+ *
+ */
 public class RemovingCharManipulatorController implements Initializable {
 
 	@FXML

@@ -7,6 +7,10 @@ import seeurrenamer.main.util.WindowLoader;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * @author moch deden 
+ *
+ */
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {

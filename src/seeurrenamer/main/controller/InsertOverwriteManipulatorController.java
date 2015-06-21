@@ -18,6 +18,10 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * @author moch deden
+ *
+ */
 public class InsertOverwriteManipulatorController implements Initializable {
 	@FXML
 	private ComboBox<PositionalRenamer> positionalRenamingComboBox;

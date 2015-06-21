@@ -11,6 +11,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
+/**
+ * @author moch deden
+ *
+ */
 public class SearchingAndReplacingManipulatorController {
 
 	@FXML

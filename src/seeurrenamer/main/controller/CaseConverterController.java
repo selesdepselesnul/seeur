@@ -16,6 +16,9 @@ import seeurrenamer.main.util.caseconverter.LowerConverter;
 import seeurrenamer.main.util.caseconverter.UnixStyleConverter;
 import seeurrenamer.main.util.caseconverter.UpperConverter;
 
+/**
+ * @author moch deden
+ */
 public class CaseConverterController implements Initializable {
 
 	@FXML

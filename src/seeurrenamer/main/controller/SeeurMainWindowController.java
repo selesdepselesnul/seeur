@@ -30,6 +30,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * @author moch deden
+ *
+ */
 public class SeeurMainWindowController implements Initializable {
 
 	@FXML
