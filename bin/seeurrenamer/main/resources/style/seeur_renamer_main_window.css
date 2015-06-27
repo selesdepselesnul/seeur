@@ -30,6 +30,18 @@
 	-fx-background-repeat: no-repeat;
 }
 
+#searching-on-dir {
+	-fx-background-color: transparent; 
+	-fx-background-image: url('image/searching_dir.png');
+	-fx-background-repeat: no-repeat;
+}
+
+#system-help-button {
+    -fx-background-color: transparent; 
+	-fx-background-image: url('image/system_help.png');
+	-fx-background-repeat: no-repeat;
+}
+
 .text-area {
     -fx-background-color: rgba(53.0,89.0,119.0,0.4);
     -fx-text-fill: white;

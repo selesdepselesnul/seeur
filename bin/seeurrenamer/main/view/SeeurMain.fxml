@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
@@ -58,13 +59,29 @@
 					<tooltip>
 						<Tooltip text="show filename before and after renaming" />
 					</tooltip>
+					<cursor>
+						<Cursor fx:constant="HAND" />
+					</cursor>
 				</TableView>
-				<VBox spacing="20.0">
+				<VBox alignment="CENTER" prefHeight="348.0" prefWidth="52.0"
+					spacing="8.0">
 					<children>
+						<Button id="searching-on-dir" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#handleSearchingPathsButton" prefHeight="38.0"
+							prefWidth="35.0">
+							<cursor>
+								<Cursor fx:constant="OPEN_HAND" />
+							</cursor>
+							<tooltip>
+								<Tooltip text="search file" />
+							</tooltip>
+						</Button>
+						<Separator prefHeight="2.0" prefWidth="32.0" />
 						<Button id="adding-button" alignment="CENTER"
 							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-							onAction="#handleOnClickAddingButton" prefHeight="32.0"
-							prefWidth="52.0">
+							onAction="#handleOnClickAddingButton" prefHeight="39.0"
+							prefWidth="33.0">
 							<cursor>
 								<Cursor fx:constant="OPEN_HAND" />
 							</cursor>
@@ -72,9 +89,9 @@
 								<Tooltip text="add files to the table" />
 							</tooltip>
 						</Button>
-						<Button id="removing-button" alignment="CENTER" fx:id="removingButton"
-							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-							onAction="#handleDeleteButton" prefHeight="32.0" prefWidth="52.0">
+						<Button id="removing-button" fx:id="removingButton"
+							alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#handleDeleteButton" prefHeight="38.0" prefWidth="32.0">
 							<cursor>
 								<Cursor fx:constant="OPEN_HAND" />
 							</cursor>
@@ -82,9 +99,10 @@
 								<Tooltip text="delete file from the table" />
 							</tooltip>
 						</Button>
-						<Button id="clearing-button" alignment="CENTER" fx:id="clearingButton"
-							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-							onAction="#handleClearButton" prefHeight="35.0" prefWidth="52.0">
+						<Separator prefWidth="200.0" />
+						<Button id="clearing-button" fx:id="clearingButton"
+							alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#handleClearButton" prefHeight="35.0" prefWidth="34.0">
 							<cursor>
 								<Cursor fx:constant="OPEN_HAND" />
 							</cursor>
@@ -92,9 +110,20 @@
 								<Tooltip text="delete all files in the table" />
 							</tooltip>
 						</Button>
+						<Separator prefWidth="200.0" />
+						<Button id="system-help-button" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+							onAction="#handleAboutButton" prefHeight="37.0" prefWidth="34.0">
+							<cursor>
+								<Cursor fx:constant="OPEN_HAND" />
+							</cursor>
+							<tooltip>
+								<Tooltip text="show help" />
+							</tooltip>
+						</Button>
 						<Button id="about-button" alignment="CENTER"
 							contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-							onAction="#handleAboutButton" prefHeight="33.0" prefWidth="52.0">
+							onAction="#handleAboutButton" prefHeight="33.0" prefWidth="34.0">
 							<cursor>
 								<Cursor fx:constant="OPEN_HAND" />
 							</cursor>
@@ -126,15 +155,15 @@
 					minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
 			</rowConstraints>
 			<children>
-				<SplitMenuButton mnemonicParsing="false" prefHeight="26.0"
-					fx:id="operationSplitMenuButton" prefWidth="181.0" text="operation"
+				<SplitMenuButton fx:id="operationSplitMenuButton"
+					mnemonicParsing="false" prefHeight="26.0" prefWidth="181.0" text="operation"
 					GridPane.halignment="RIGHT" GridPane.rowIndex="1">
 					<items>
 						<MenuItem mnemonicParsing="false" onAction="#handleOnInsAndOvMenuItem"
 							text="insert or overwrite" />
 						<SeparatorMenuItem mnemonicParsing="false" />
-						<MenuItem mnemonicParsing="false" text="search and replace"
-							onAction="#handleSearchingAndReplacingMenuItem" />
+						<MenuItem mnemonicParsing="false"
+							onAction="#handleSearchingAndReplacingMenuItem" text="search and replace" />
 						<SeparatorMenuItem mnemonicParsing="false" />
 						<MenuItem mnemonicParsing="false" onAction="#handleCaseConverterMenuItem"
 							text="convert case" />
@@ -167,9 +196,9 @@
 					prefHeight="47.0" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Button id="rename-button" mnemonicParsing="false" fx:id="renamingButton"
-					onAction="#handleRenameButton" prefHeight="33.0" prefWidth="59.0"
-					GridPane.halignment="CENTER" GridPane.rowIndex="1">
+				<Button id="rename-button" fx:id="renamingButton"
+					mnemonicParsing="false" onAction="#handleRenameButton" prefHeight="33.0"
+					prefWidth="59.0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 					<GridPane.margin>
 						<Insets left="30.0" />
 					</GridPane.margin>
@@ -191,6 +220,9 @@
 			<tooltip>
 				<Tooltip text="show the output" />
 			</tooltip>
+			<cursor>
+				<Cursor fx:constant="MOVE" />
+			</cursor>
 		</TextArea>
 	</children>
 </GridPane>

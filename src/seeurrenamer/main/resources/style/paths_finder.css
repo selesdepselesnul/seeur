@@ -1,0 +1,11 @@
+.toggle-button {
+	-fx-background-color: transparent; 
+	-fx-background-image: url('image/bullet_red.png');
+	-fx-background-repeat: no-repeat ;
+}
+
+.button {
+	-fx-background-color: transparent; 
+	-fx-background-image: url('image/searching_small.png');
+	-fx-background-repeat: no-repeat ;
+}

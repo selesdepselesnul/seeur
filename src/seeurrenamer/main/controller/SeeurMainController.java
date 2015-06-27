@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seeurrenamer.main.controller.manipulator.CaseManipulatorController;
 import seeurrenamer.main.controller.manipulator.InsertingOrOverwritingManipulatorController;
@@ -23,6 +24,7 @@ import seeurrenamer.main.util.PathsRenamer;
 import seeurrenamer.main.util.WindowLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -158,12 +160,14 @@ public class SeeurMainController implements Initializable {
 			disableControl(false);
 			this.outputConsoleTextArea.setStyle("-fx-text-fill: green");
 			this.outputConsoleTextArea.setText("ready for renaming !\n");
-			List<Path> pathList = fileList.stream()
-					.map(files -> files.toPath()).collect(Collectors.toList());
-			this.pairPathList.addAll(pathList.stream()
-					.map(path -> new PairPath(path))
-					.collect(Collectors.toList()));
+			addFileStreamToTable(fileList.stream().map(files -> files.toPath())
+					.collect(Collectors.toList()).stream());
 		}
+	}
+
+	private void addFileStreamToTable(Stream<Path> pathStream) {
+		this.pairPathList.addAll(pathStream.map(path -> new PairPath(path))
+				.collect(Collectors.toList()));
 	}
 
 	private void disableControl(boolean isDisable) {
@@ -299,15 +303,22 @@ public class SeeurMainController implements Initializable {
 	}
 
 	@FXML
-	public void handleAboutButton() {
+	public void handleAboutButton(ActionEvent actionEvent) {
 		try {
 
+			Button button = (Button) actionEvent.getSource();
+			String resources = null;
+			if (button.getId().equals("system-help-button")) {
+				resources = "seeurrenamer/main/resources/text/regex_summary.txt";
+			} else {
+				System.out.println("about");
+				resources = "seeurrenamer/main/resources/text/license.txt";
+			}
 			this.outputConsoleTextArea.setStyle("-fx-text-fill: white");
 			this.outputConsoleTextArea.clear();
 			BufferedReader bufferedReader = new BufferedReader(
 					new InputStreamReader(
-							ClassLoader
-									.getSystemResourceAsStream("seeurrenamer/main/resources/text/license.txt")));
+							ClassLoader.getSystemResourceAsStream(resources)));
 			this.outputConsoleTextArea.setText(bufferedReader.lines().collect(
 					Collectors.joining("\n")));
 			bufferedReader.close();
@@ -320,4 +331,25 @@ public class SeeurMainController implements Initializable {
 		this.stage = stage;
 	}
 
+	@FXML
+	public void handleSearchingPathsButton() {
+		try {
+			new WindowLoader(
+					"seeurrenamer/main/view/PathsFinder.fxml",
+					"seeurrenamer/main/resources/style/paths_finder.css",
+					"Paths Searcher",
+					(fxmlLoader, stage) -> {
+						PathsFinderController pathsFinderController = (PathsFinderController) fxmlLoader
+								.getController();
+						pathsFinderController.setStage(stage);
+						pathsFinderController
+								.setPairPathList(this.pairPathList);
+					}).show(WindowLoader.SHOW_AND_WAITING);
+			if (!this.pairPathList.isEmpty()) {
+				disableControl(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

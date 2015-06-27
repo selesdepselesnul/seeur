@@ -1,11 +1,9 @@
 package seeurrenamer.main.controller.manipulator;
 
-import java.io.IOException;
 
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
 import seeurrenamer.main.util.RegexRenamer;
-import seeurrenamer.main.util.WindowLoader;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -43,19 +41,6 @@ public class SearchingAndReplacingManipulatorController {
 
 	public void setPairPathList(ObservableList<PairPath> pairPathList) {
 		this.pairPathList = pairPathList;
-	}
-
-	@FXML
-	public void handleHelpRegex() {
-		try {
-			WindowLoader windowLoader = new WindowLoader(
-					"seeurrenamer/main/view/RegexSummary.fxml",
-					"Regex Summary", null);
-			windowLoader.setResizable(true);
-			windowLoader.show(WindowLoader.SHOW_ONLY);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void setPathsRenamer(PathsRenamer pathsRenamer) {
