@@ -185,7 +185,7 @@ public class SeeurMainController implements Initializable {
 		this.pairPathList.clear();
 		this.outputConsoleTextArea.clear();
 		this.outputConsoleTextArea
-				.setText("table is empty, click plus button for add files to table");
+				.setText("table is empty, click plus button for adding files to table");
 	}
 
 	@FXML
