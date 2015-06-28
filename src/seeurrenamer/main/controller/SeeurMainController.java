@@ -43,6 +43,10 @@ import javafx.stage.Stage;
  */
 public class SeeurMainController implements Initializable {
 
+	private static final String FINISHED_RENAMING_MESSAGE = "\n\n\nfinished renaming all files !\n\n\n";
+
+	private static final String EMPTY_TABLE_MESSAGE = "table is empty, click plus button or paths finder button for adding files to table\n\n";
+
 	@FXML
 	private TableView<PairPath> pairPathTableView;
 
@@ -83,8 +87,7 @@ public class SeeurMainController implements Initializable {
 		this.pairPathTableView.setItems(pairPathList);
 		this.pairPathTableView
 				.setPlaceholder(new Label("No files are selected"));
-		this.outputConsoleTextArea
-				.setText("table is empty, click plus button for add files to table");
+		this.outputConsoleTextArea.setText(EMPTY_TABLE_MESSAGE);
 
 	}
 
@@ -184,8 +187,7 @@ public class SeeurMainController implements Initializable {
 		this.outputConsoleTextArea.setStyle("-fx-text-fill: white");
 		this.pairPathList.clear();
 		this.outputConsoleTextArea.clear();
-		this.outputConsoleTextArea
-				.setText("table is empty, click plus button for adding files to table");
+		this.outputConsoleTextArea.setText(EMPTY_TABLE_MESSAGE);
 	}
 
 	@FXML
@@ -196,31 +198,29 @@ public class SeeurMainController implements Initializable {
 	}
 
 	private void renameToDisk(ObservableList<PairPath> pairPathList) {
-		new Thread(
-				() -> {
-					List<PairPath> newPairPathList = new ArrayList<>();
-					this.outputConsoleTextArea.setStyle("-fx-text-fill: green");
-					this.outputConsoleTextArea.clear();
-					this.pairPathList.forEach(pairPath -> {
-						try {
-							Path beforeFullPath = pairPath.getBeforeFullPath();
-							Path afterFullPath = pairPath.getAfterFullPath();
-							newPairPathList.add(new PairPath(afterFullPath,
-									afterFullPath));
-							Files.move(beforeFullPath, afterFullPath);
-							outputConsoleTextArea.appendText("rename :\n"
-									+ pairPath.getBeforeFullPath() + "\nto :\n"
-									+ pairPath.getAfterFullPath() + "\n\n\n");
-							TimeUnit.MILLISECONDS.sleep(100);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+		new Thread(() -> {
+			List<PairPath> newPairPathList = new ArrayList<>();
+			this.outputConsoleTextArea.setStyle("-fx-text-fill: green");
+			this.outputConsoleTextArea.clear();
+			this.pairPathList.forEach(pairPath -> {
+				try {
+					Path beforeFullPath = pairPath.getBeforeFullPath();
+					Path afterFullPath = pairPath.getAfterFullPath();
+					newPairPathList.add(new PairPath(afterFullPath,
+							afterFullPath));
+					Files.move(beforeFullPath, afterFullPath);
+					outputConsoleTextArea.appendText("rename :\n"
+							+ pairPath.getBeforeFullPath() + "\nto :\n"
+							+ pairPath.getAfterFullPath() + "\n\n\n");
+					TimeUnit.MILLISECONDS.sleep(100);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
-					});
-					this.pairPathList.setAll(new ArrayList<>(newPairPathList));
-					this.outputConsoleTextArea
-							.appendText("\n\n\nfinished renaming all files !\n\n\n");
-				}).start();
+			});
+			this.pairPathList.setAll(new ArrayList<>(newPairPathList));
+			this.outputConsoleTextArea.appendText(FINISHED_RENAMING_MESSAGE);
+		}).start();
 	}
 
 	@FXML
@@ -345,6 +345,8 @@ public class SeeurMainController implements Initializable {
 								.setPairPathList(this.pairPathList);
 					}).show(WindowLoader.SHOW_AND_WAITING);
 			if (!this.pairPathList.isEmpty()) {
+				this.outputConsoleTextArea.setStyle("-fx-text-fill: green");
+				this.outputConsoleTextArea.setText("ready for renaming !\n");
 				disableControl(false);
 			}
 		} catch (IOException e) {

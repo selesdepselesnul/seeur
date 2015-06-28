@@ -74,7 +74,7 @@
 								<Cursor fx:constant="OPEN_HAND" />
 							</cursor>
 							<tooltip>
-								<Tooltip text="search file" />
+								<Tooltip text="find files inside dir" />
 							</tooltip>
 						</Button>
 						<Separator prefHeight="2.0" prefWidth="32.0" />
