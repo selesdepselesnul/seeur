@@ -3,7 +3,7 @@ package seeurrenamer.main;
 import java.io.IOException;
 
 import seeurrenamer.main.controller.SeeurMainController;
-import seeurrenamer.main.util.WindowLoader;
+import seeurrenamer.main.util.gui.WindowLoader;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

@@ -21,7 +21,7 @@ import seeurrenamer.main.controller.manipulator.SearchingAndReplacingManipulator
 import seeurrenamer.main.controller.manipulator.SequenceManipulatorController;
 import seeurrenamer.main.model.PairPath;
 import seeurrenamer.main.util.PathsRenamer;
-import seeurrenamer.main.util.WindowLoader;
+import seeurrenamer.main.util.gui.WindowLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -311,7 +311,6 @@ public class SeeurMainController implements Initializable {
 			if (button.getId().equals("system-help-button")) {
 				resources = "seeurrenamer/main/resources/text/regex_summary.txt";
 			} else {
-				System.out.println("about");
 				resources = "seeurrenamer/main/resources/text/license.txt";
 			}
 			this.outputConsoleTextArea.setStyle("-fx-text-fill: white");
@@ -337,7 +336,7 @@ public class SeeurMainController implements Initializable {
 			new WindowLoader(
 					"seeurrenamer/main/view/PathsFinder.fxml",
 					"seeurrenamer/main/resources/style/paths_finder.css",
-					"Paths Searcher",
+					"Paths Finder",
 					(fxmlLoader, stage) -> {
 						PathsFinderController pathsFinderController = (PathsFinderController) fxmlLoader
 								.getController();

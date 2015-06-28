@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import seeurrenamer.main.model.PairPath;
-import seeurrenamer.main.util.PathsFinder;
+import seeurrenamer.main.util.gui.PathsFinder;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

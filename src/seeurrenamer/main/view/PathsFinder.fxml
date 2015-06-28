@@ -6,40 +6,47 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane collapsible="false" prefHeight="108.0" prefWidth="260.0" text="path finder" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seeurrenamer.main.controller.PathsFinderController">
-	<content>
-		<GridPane prefHeight="81.0" prefWidth="233.0">
-			<children>
-				<TextField fx:id="regexTextField" disable="true" prefHeight="25.0" prefWidth="201.0" promptText="regex">
-					<GridPane.margin>
-						<Insets left="10.0" />
-					</GridPane.margin>
-				</TextField>
-				<Button mnemonicParsing="false" onAction="#handleSearchingButton" prefHeight="39.0" prefWidth="51.0" GridPane.rowIndex="1">
-					<GridPane.margin>
-						<Insets left="10.0" />
-					</GridPane.margin>
-					<cursor>
-						<Cursor fx:constant="HAND" />
-					</cursor>
-				</Button>
-				<ToggleButton fx:id="regexOnOffToggleButton" mnemonicParsing="false" onAction="#handleOnOffToggleButton" prefHeight="28.0" prefWidth="47.0" GridPane.columnIndex="1">
-					<GridPane.margin>
-						<Insets bottom="6.0" />
-					</GridPane.margin>
-					<cursor>
-						<Cursor fx:constant="HAND" />
-					</cursor>
-				</ToggleButton>
-			</children>
-			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="201.0" />
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="28.0" />
-			</columnConstraints>
-			<rowConstraints>
-				<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
-			</rowConstraints>
-		</GridPane>
-	</content>
-</TitledPane>
+
+<GridPane prefHeight="81.0" prefWidth="233.0"
+	xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="seeurrenamer.main.controller.PathsFinderController">
+	<children>
+		<TextField fx:id="regexTextField" disable="true" prefHeight="25.0"
+			prefWidth="201.0" promptText="regex">
+			<GridPane.margin>
+				<Insets left="10.0" />
+			</GridPane.margin>
+		</TextField>
+		<Button mnemonicParsing="false" onAction="#handleSearchingButton"
+			prefHeight="39.0" prefWidth="51.0" GridPane.rowIndex="1">
+			<GridPane.margin>
+				<Insets left="10.0" />
+			</GridPane.margin>
+			<cursor>
+				<Cursor fx:constant="HAND" />
+			</cursor>
+		</Button>
+		<ToggleButton fx:id="regexOnOffToggleButton"
+			mnemonicParsing="false" onAction="#handleOnOffToggleButton"
+			prefHeight="28.0" prefWidth="47.0" GridPane.columnIndex="1">
+			<GridPane.margin>
+				<Insets bottom="6.0" />
+			</GridPane.margin>
+			<cursor>
+				<Cursor fx:constant="HAND" />
+			</cursor>
+		</ToggleButton>
+	</children>
+	<columnConstraints>
+		<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
+			minWidth="10.0" prefWidth="201.0" />
+		<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
+			minWidth="10.0" prefWidth="28.0" />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints maxHeight="1.7976931348623157E308"
+			minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="1.7976931348623157E308"
+			minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
+	</rowConstraints>
+</GridPane>

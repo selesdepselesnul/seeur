@@ -1,4 +1,4 @@
-package seeurrenamer.main.util;
+package seeurrenamer.main.util.gui;
 
 import java.io.IOException;
 import java.util.function.BiConsumer;
