@@ -138,7 +138,6 @@ public class SeeurMainController implements Initializable {
 			checkIfTableIsNotEmpty();
 			new WindowLoader(
 					"seeurrenamer/main/view/manipulator/SearchingAndReplacingManipulator.fxml",
-					"seeurrenamer/main/resources/style/searching_and_replacing_window.css",
 					"search and replace",
 					(fxmlLoader, stage) -> {
 						SearchingAndReplacingManipulatorController searchingAndReplacingManipulatorController = (SearchingAndReplacingManipulatorController) fxmlLoader
@@ -328,7 +327,7 @@ public class SeeurMainController implements Initializable {
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
-	}
+}
 
 	@FXML
 	public void handleSearchingPathsButton() {
